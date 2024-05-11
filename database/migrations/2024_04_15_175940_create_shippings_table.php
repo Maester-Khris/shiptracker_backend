@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer("actual_point_id")->nullable();
             $table->string("reference_exp")->nullable();
             $table->string("codebar_url")->nullable();
+            $table->string("codebar_digit")->nullable();
             $table->datetime("departure_date")->nullable();
             $table->datetime("arrival_date")->nullable();
             $table->foreign('user_id')->references('id')->on('users');

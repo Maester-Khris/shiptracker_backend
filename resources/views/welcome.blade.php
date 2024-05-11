@@ -9,7 +9,7 @@
     {{-- @php
         dd(Auth::user());
     @endphp --}}
-    <p>username is {{Auth::user()->name}}</p>
+    {{-- <p>username is {{Auth::user()->name}}</p> --}}
     <button id="welcome">Click me to test Shipping ordering </button>
     <button id="launch">Click me to test Shipping launch </button>
     <button id="update">Click me to test shipping status update </button>
@@ -33,16 +33,16 @@
                         {description: "Telephone", weight: 5.3}
                     ]
                 };
-                axios.post('/live/test', data).then(function(response){
+                axios.post('/live/test/order', data).then(function(response){
                     console.log(response.data);
                 })
             });
             bt2.addEventListener("click",function(){
                 data = {
-                    shipcode: "SHIPB690B3766560",
-                    routeuuid: "f059a897-eee0-42bb-ba54-cb5be6c2a443"
+                    shipcode: "SHIP118EA2528222",
+                    routeuuid: "a004ac1e-54cd-437e-a2f0-c73ee44f06f2"
                 };
-                axios.post('/live/test', data).then(function(response){
+                axios.post('/live/test/launch', data).then(function(response){
                     console.log(response.data);
                 })
             });
@@ -59,7 +59,7 @@
             });
             bt4.addEventListener("click",function(){
                 data = {
-                    shipcode: "SHIPB690B3766560",
+                    shipcode: "SHIP118EA2528222",
                     shipstatus: 2
                 };
                 axios.post('/live/test', data).then(function(response){
@@ -68,8 +68,8 @@
             });
             bt5.addEventListener("click",function(){
                 data = {
-                    shipcode: "SHIPB690B3766560",
-                    route_uiid: "f059a897-eee0-42bb-ba54-cb5be6c2a443",
+                    shipcode: "SHIP118EA2528222",
+                    route_uiid: "a004ac1e-54cd-437e-a2f0-c73ee44f06f2",
                     ship_pointid: 5
                 };
                 axios.post('/live/test', data).then(function(response){

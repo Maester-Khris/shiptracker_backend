@@ -15,7 +15,7 @@ class ShipRouteFactory extends Factory
     public function definition()
     {
         return [
-            "route_name" => $this->faker->name(),
+            "route_name" => 'test ' . $this->faker->name(),
             "route_uuid" => Str::uuid(),
             "route_points" => [
                 [

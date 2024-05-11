@@ -13,7 +13,7 @@ class ShipPackageFactory extends Factory
     {
         return [
             "reference_num" =>  $this->faker->randomNumber(6, true),
-            "description" => $this->faker->paragraph(),
+            "description" => $this->faker->sentence(15),
             "weight" => $this->faker->randomNumber(2, false),
         ];
     }

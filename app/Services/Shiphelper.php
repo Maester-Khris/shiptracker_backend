@@ -66,8 +66,20 @@ class Shiphelper{
             }
         }
         $costs = collect($TOTAL_COST)->sum();
-        dd($costs);
         return $costs;
+    }
+    public static function singleCostEstmator($data){
+        $FREIGHT_OFFER = 12;
+        $TOTAL_COST = [];
+        if(count($data)>0){
+            foreach($data as $package){
+                $volumetric_w = ($package["length"] * $package["width"] * $package["height"]) / 6000 ;
+                $billed_w = $volumetric_w > $package["weight"] ? $volumetric_w : $package["weight"];
+                $TOTAL_COST[] = $billed_w * $FREIGHT_OFFER;
+            }
+        }
+        // $costs = collect($TOTAL_COST)->sum();
+        return $TOTAL_COST;
     }
 
     public static function getShippingStatus($statuscode){

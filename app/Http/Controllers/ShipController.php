@@ -14,6 +14,7 @@ use App\Services\Barcode;
 use App\Services\Shiphelper;
 
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Auth;
 
 class ShipController extends Controller
 {
@@ -23,6 +24,25 @@ class ShipController extends Controller
     public function __construct(Barcode $barcodeservice, Shiphelper $shipService){
         $this->barcodeService = $barcodeservice;
         $this->shipService = $shipService;
+    }
+
+    /**
+     * ============== Web functions ============== 
+     * 
+    */
+    public function userspace_expedition(){
+        $userid = Auth::user()->id;
+        $shippings = Shipping::whereHas("proprietary", function ($query) use ($userid) {
+                $query->where('id', $userid);
+            })
+            ->get();
+        return view('userspace.expedition')->with(compact('shippings'));
+    }
+    public function userspace_account(){
+        return view('userspace.account');
+    }
+    public function userspace_estimator(){
+        return view('userspace.estimator');
     }
 
 
@@ -43,7 +63,8 @@ class ShipController extends Controller
             $shipping->route_uuid = $ship_route->route_uuid;
             $shipping->actual_point_id = $ship_route_data[0]["point_id"];
             $shipping->departure_date = $today;
-            $shipping->codebar_url = $barcode_url;
+            $shipping->codebar_url = $barcode_url; 
+            $shipping->codebar_digit = $barcode_digit;
             $shipping->save();
             return response()->json($shipping->toJson(), 200);
         }else{
@@ -88,10 +109,22 @@ class ShipController extends Controller
     /**
      * ============== Client functions ============== 
      * on function n°2: no need to use proprietary method since every ship has a unique code
+     * SHIP66555392
     */
+    public function getShippingBarcodeUrl(Request $request){
+        $ship = Shipping::where("reference_exp",$request->shipcode)->first();
+        if($ship->exists()){
+            if($ship->codebar_url == null){
+                return response()->json(["message"=>"Not barcode"], 200);
+            }else{
+                return response()->json(["message"=>"Found barcode", "img"=>$ship->codebar_url], 200);
+            }
+        }else{
+            return response()->json(["message"=>"Shipping not found"], 404);
+        }
+    }
     public function orderShipping(Request $request){
-        // get the auth user
-        $user = User::find(2);
+        $userid = Auth::user()->id;
         $packages = $request->packages;
         foreach($packages as $index => $pa){
             $pa['reference_num'] = strtoupper(substr(str_replace('-', '', Str::uuid()), 0, 6));
@@ -100,23 +133,20 @@ class ShipController extends Controller
         $identifier = $this->shipService::generateReferenceCode();
         $shipping = Shipping::create([
             'reference_exp' => $identifier,
-            'sender' => $request->sender,
+            'sender' => Auth::user()->name,
             'receiver' => $request->receiver,
-            'user_id' => $user->id,
+            'user_id' => $userid,
         ])->packages()->createMany($packages);
         return response()->json($shipping->toJson(), 200);
     }
     public function getUserShippingDetails(Request $request){
-        // get the auth user
-        $user = User::find(2);
-        $ships = Shipping::where("reference_exp",$request->$shipcode)
+        $ships = Shipping::where("reference_exp",$request->shipcode)
             ->with('packages')
             ->first();
-        return response()->json($ships->toJson(), 200);;
+        return response()->json($ships->toJson(), 200);
     }
     public function getUserShippingsHistory(){
-        // get the auth user
-        $user = User::find(2);
+        $userid = Auth::user()->id;
         $ships = Shipping::with('packages')
             ->whereHas("proprietary", function ($query) use ($userid) {
                 $query->where('id', $userid);
@@ -126,7 +156,7 @@ class ShipController extends Controller
         return response()->json($ships->toJson(), 200);
     }
     public function estimateCost(Request $request){
-        $result = $this->shipService::costEstmator($request->package_infos);
+        $result = $this->shipService::singleCostEstmator($request->package_infos);
         return response()->json($result, 200);
     }   
     

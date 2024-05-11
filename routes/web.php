@@ -14,18 +14,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// ========================= VCiew Loading ===============
+// ================== View Loading ===============
 Route::get('/', function () { return view('home'); }); 
-Route::get('/estimator', function () { return view('estimator'); });
-Route::get('/userpace/account', function () { return view('userspace.account'); });
-Route::get('/userpace/expeditions', function () { return view('userspace.expedition'); });
-Route::get('/userpace/estimator', function () { return view('userspace.estimator'); });
+Route::get('/estimator', function () { return view('estimator'); }); 
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/userspace/account', 'App\Http\Controllers\ShipController@userspace_account' ); 
+    Route::post('/userspace/account/edit', 'App\Http\Controllers\UserController@updateUserInfo' );
+    Route::get('/userspace/expeditions', 'App\Http\Controllers\ShipController@userspace_expedition' );
+    Route::get('/userspace/estimator', 'App\Http\Controllers\ShipController@userspace_estimator');
+
+    // Route called by js
+    
+    Route::post('/userspace/expeditions/details', 'App\Http\Controllers\RestController@getUserShippingDetail');
+    Route::post('/userspace/expeditions/new-order','App\Http\Controllers\ShipController@orderShipping');
+
+    Route::post('/userspace/package-estimator', 'App\Http\Controllers\ShipController@estimateCost');
+    Route::post('/userspace/expedition/get-barcode','App\Http\Controllers\ShipController@getShippingBarcodeUrl');
+});
+
 
 // ========================= Auth =========================
 Route::get('/signin','App\Http\Controllers\UserController@showSignin')->name('login');
 Route::post('/signin','App\Http\Controllers\UserController@signinUser');
 Route::get('/signup','App\Http\Controllers\UserController@showSignup')->name('signup');
 Route::post('/signup','App\Http\Controllers\UserController@signupUser');
+Route::get('/userspace/signout','App\Http\Controllers\UserController@signOutUser');
 
 
 // ========================= MAIL Verification ============
@@ -45,10 +59,14 @@ Route::get('/newBarcode','App\Http\Controllers\FeatureController@barcode');
 
 
 // ========================= Test =========================
-Route::middleware(['auth'])->group(function () {
-    Route::get('/test','App\Http\Controllers\TestController@welcome')->name('home');
-});
-Route::get('/feature/test','App\Http\Controllers\ShipController@launchShipping');
-Route::post('/live/test','App\Http\Controllers\ShipController@markShippingNewPoint');
-Route::get('/live/test','App\Http\Controllers\UserController@signOutUser');
+Route::get('/test','App\Http\Controllers\TestController@welcome')->name('home');
+
+
+
+
+
+// Route::post('/live/test/launch','App\Http\Controllers\ShipController@launchShipping');
+// Route::get('/feature/test','App\Http\Controllers\ShipController@launchShipping');
+// Route::post('/live/test','App\Http\Controllers\ShipController@markShippingNewPoint');
+// Route::get('/live/test','App\Http\Controllers\UserController@signOutUser');
 

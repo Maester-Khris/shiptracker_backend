@@ -58,7 +58,8 @@
         * how to deal with: on shipping creation add routeuuid on shipping and along the course update actual point uuid based on route uuid
     * when sending data through api like 
         * use sethidden, setvisible toarray tojson
-    
+    * Package model!
+        * change weight to infos: height x width x lenght x weight
 
 
     
@@ -79,4 +80,6 @@
         * user informations with update forms
         * user preferences
     
-- UI Nucleo icons
+Telephone Sm
+
+Ordinateur HP

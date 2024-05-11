@@ -58,7 +58,7 @@ class FeatureController extends Controller
     }
 
     public function barcode(){
-        $res = $this->barcodeService::generateBarcode();
+        $res = $this->barcodeService::generateBarcode('SHIPB690B3766560','SHIPB690B3766560');
         return response()->json(['message'=> "image code saved"],200);
     }
 }

@@ -50,7 +50,7 @@ class Barcode{
         Storage::disk('local')->put($filename, $imageData);
 
         // return base64_encode($imageData);
-        return Storage::url($filename);;
+        return Storage::url($filename);
     }
 
 
