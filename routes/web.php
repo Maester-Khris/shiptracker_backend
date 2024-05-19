@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 // ================== View Loading ===============
 Route::get('/', function () { return view('home'); }); 
+Route::get('/contact', function () { return view('contact'); }); 
+Route::get('/pricing', function () { return view('pricing'); }); 
 Route::get('/estimator', function () { return view('estimator'); }); 
 
 Route::middleware(['auth'])->group(function () {

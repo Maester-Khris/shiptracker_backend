@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Shipping;
@@ -12,15 +13,15 @@ class RestController extends Controller
     public function connectUser(Request $request){
         $user = User::where("email",$request->email)->first();
         if($user->exists()){
-            // $is_pass_correct = Hash::check("Admin pass", $request->password);
-            // if($is_pass_correct){
+            $is_pass_correct = Hash::check($request->password, $user->password);
+            if($is_pass_correct){
                 return response()->json([
                     "data" => $user->toJson(),
                     "apiToken" => $user->createToken($request->device)->plainTextToken
                 ], 200);
-            // }else{
-            //     $request->json(["message"=>"incorrect credentials"],200); 
-            // }
+            }else{
+                $request->json(["message"=>"incorrect credentials"],200); 
+            }
         }else{
             $request->json(["message"=>"No user found"],404); 
         }

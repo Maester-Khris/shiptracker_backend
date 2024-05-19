@@ -78,7 +78,7 @@
 </head>
 
 <body>
-    <header id="header" class="header d-flex align-items-center fixed-top">
+    <header id="header" class="header d-flex align-items-center fixed-top sticked">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
                 <img src="/assets/img/logo_partial.png" alt="" style="max-height: 55px;">
@@ -88,12 +88,10 @@
             <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="#" class="active">Accueil</a></li>
-                    <li><a href="#">Nos Services</a></li>
-                    <li><a href="#">Formules</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="/userspace/account">Mon compte</a></li>
-                    <li><a class="get-a-quote" href="/estimator">Obtenir un devis</a></li>
+                    <li><a href="/" class="{{$active_link == "home" ? 'active' : ''}}">Accueil</a></li>
+                    <li><a href="/pricing" class="{{$active_link == "pricing" ? 'active' : ''}}">Nos Formules</a></li>
+                    <li><a href="/contact" class="{{$active_link == "contact" ? 'active' : ''}}">Contact</a></li>
+                    <li><a class="get-a-quote"  href="/userspace/account">Mon compte</a></li>
                 </ul>
             </nav>
         </div>
@@ -117,16 +115,16 @@
                 </div>
                 <div class="col-lg-3 col-6 footer-links">
                     <h4>Liens Utils</h4>
-                    <ul>
+                    <ul style="transform:translateX(25%);">
                         <li><a href="#">Accueil</a></li>
                         <li><a href="/estimator">Devis</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a href="/userspace/expeditions">Espace utilisateur</a></li>
+                        {{-- <li><a href="/userspace/expeditions">Espace utilisateur</a></li> --}}
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
                     <h4>Contact Us</h4>
-                    <p>
+                    <p style="transform:translateX(25%);">
                         2 Rue Edouard Thouvenel <br>
                         74100 Ville-la-Grand<br>
                         France <br><br>
@@ -163,14 +161,36 @@
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
     <script>
+        function scrollToTop() {
+            let currentPosition = window.pageYOffset;
+            const scrollStep = 50; // Adjust this value to control the scroll speed
+
+            function animateScroll() {
+                if (currentPosition > 0) {
+                window.scrollBy(0, -scrollStep);
+                currentPosition -= scrollStep;
+                requestAnimationFrame(animateScroll);
+                } else {
+                window.scrollTo(0, 0); // Ensure the scrollbar is exactly at the top
+                }
+            }
+
+            animateScroll();
+        }
         document.addEventListener("DOMContentLoaded", function () {
-            console.log('loaded');
+            scrollToTop();
             const inputFields = document.querySelectorAll('.tab-content .form-outline input');
             inputFields.forEach(input => {
                 input.addEventListener('blur', () => {
                     input.classList.add('active');
                 });
             });
+
+            window.addEventListener('scroll', function(){
+                if (window.pageYOffset === 0) {
+                    document.querySelector("header").classList.add("sticked");
+                }
+            })
         });
     </script>
     @stack('scripts')

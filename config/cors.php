@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['GET', 'POST', 'PUT'],
 
-    'allowed_origins' => ['http://localhost:8100', 'https://localhost'],
+    'allowed_origins' => ['http://localhost:8100', 'http://localhost:8101', 'https://localhost'],
 
     'allowed_origins_patterns' => [],
 

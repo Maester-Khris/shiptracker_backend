@@ -1,4 +1,4 @@
-@extends('layout',['title'=>'Accueil'])
+@extends('layout',['title'=>'Accueil', 'active_link'=>'home'])
 
 @section('content')
   <!-- ======= Hero Section ======= -->
@@ -25,7 +25,7 @@
 </section>
 
 <main id="main">
-    <section id="featured-services" class="featured-services">
+    {{-- <section id="featured-services" class="featured-services">
         <div class="container">
 
             <div class="section-header">
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section id="service" class="services pt-0">
         <div class="container" data-aos="fade-up">
@@ -129,7 +129,7 @@
             </div>
     </section>
 
-    <section id="call-to-action" class="call-to-action">
+    {{-- <section id="call-to-action" class="call-to-action">
         <div class="container" data-aos="zoom-out">
 
             <div class="row justify-content-center">
@@ -145,7 +145,8 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
+
 </main>
 
 @endsection
