@@ -129,10 +129,10 @@
     <script src="/assets/admin/custom.min.js"></script>
 
     <!-- JQVMap -->
-    {{-- <script src="/assets/admin/plugins/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="/assets/admin/plugins/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="/assets/admin/plugins/jqvmap/examples/js/jquery.vmap.sampledata.js"></script> --}}
-    {{-- <script src="/assets/admin/plugins/bootstrap-daterangepicker/daterangepicker.js"></script> --}}
+    {{-- <script src="assets/admin/plugins/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="assets/admin/plugins/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="assets/admin/plugins/jqvmap/examples/js/jquery.vmap.sampledata.js"></script> --}}
+    {{-- <script src="assets/admin/plugins/bootstrap-daterangepicker/daterangepicker.js"></script> --}}
 	
   </body>
 </html>

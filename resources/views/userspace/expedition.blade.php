@@ -1,7 +1,7 @@
 @extends('userspace/layout',['title'=>'Mes Expeditions', 'menu_item_title'=>'Expeditions'])
 
     @push('styles')
-        <link rel="stylesheet" href="/assets/css/loader.css">
+        <link rel="stylesheet" href="assets/css/loader.css">
         <style>
             .icon-clickable{
                 cursor: pointer;
@@ -10,7 +10,7 @@
     @endpush
 
     @push('scripts')
-        <script src="/assets/js/axios.min.js"></script>
+        <script src="assets/js/axios.min.js"></script>
         <script>    	
             document.addEventListener("DOMContentLoaded",function(){
                 var swiper = new Swiper('.swiper-container', {
@@ -248,7 +248,7 @@
                     </div>
                     <div class="col-md-5" style="margin: auto 0px;">
                         <div class="position-relative" style="margin-bottom: 30px; text-align:center;">
-                            <img id="ship-barcode" src="/assets/img/no-barcode.png" class="img-thumbnail" alt="ship bar code" style="height: 80px; width:200px;margin-bottom: 5px;">
+                            <img id="ship-barcode" src="assets/img/no-barcode.png" class="img-thumbnail" alt="ship bar code" style="height: 80px; width:200px;margin-bottom: 5px;">
                             {{-- <img id="ship-barcode" src="{{ Storage::disk('local')->url("barcodes/code_6.jpg") }}" class="img-thumbnail" alt="ship bar code" style="height: 80px; width:200px;margin-bottom: 5px;"> --}}
                             <i class="position-absolute icon-clickable ph-bold ph-download-simple" style="top:3px; right:3px;font-size:15px;"></i>
                             <h5 style="font-size:18px,">Code bar de l'expédition</h5>

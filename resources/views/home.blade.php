@@ -18,7 +18,7 @@
                 </p>
             </div>
             <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-                <img src="/assets/img/hero-img.svg" class="img-fluid mb-3 mb-lg-0" alt="">
+                <img src="assets/img/hero-img.svg" class="img-fluid mb-3 mb-lg-0" alt="">
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="card">
                         <div class="card-img">
-                            <img src="/assets/img/storage-service.jpg" alt="" class="img-fluid">
+                            <img src="assets/img/storage-service.jpg" alt="" class="img-fluid">
                         </div>
                         <h3><a href="service-details.html" class="stretched-link">Stockage</a></h3>
                         <p>
@@ -91,7 +91,7 @@
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="card">
                         <div class="card-img">
-                            <img src="/assets/img/logistics-service.jpg" alt="" class="img-fluid">
+                            <img src="assets/img/logistics-service.jpg" alt="" class="img-fluid">
                         </div>
                         <h3><a href="service-details.html" class="stretched-link">Logistique</a></h3>
                         <p>
@@ -104,7 +104,7 @@
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="card">
                         <div class="card-img">
-                            <img src="/assets/img/cargo-service.jpg" alt="" class="img-fluid">
+                            <img src="assets/img/cargo-service.jpg" alt="" class="img-fluid">
                         </div>
                         <h3><a href="service-details.html" class="stretched-link">Conteneur</a></h3>
                         <p>
@@ -117,7 +117,7 @@
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
                     <div class="card">
                         <div class="card-img">
-                            <img src="/assets/img/packaging-service.jpg" alt="" class="img-fluid">
+                            <img src="assets/img/packaging-service.jpg" alt="" class="img-fluid">
                         </div>
                         <h3><a href="service-details.html" class="stretched-link">Packaging</a></h3>
                         <p>

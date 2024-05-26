@@ -10,7 +10,7 @@
         </div>
 
         <div class="col-lg-4">
-         <img src="/assets/img/satisfaction.png" alt="satisfaction" style="height: 300px; width:300px;">
+         <img src="assets/img/satisfaction.png" alt="satisfaction" style="height: 300px; width:300px;">
         </div>
 
         <div class="col-lg-8">

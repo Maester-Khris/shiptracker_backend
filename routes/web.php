@@ -25,7 +25,7 @@ Route::get('/reclamation', function () { return view('reclamation'); });
 
 
 // ================== Admin Space Views ===============
-// Route::get('/dashboard', function () { return view('admin/home'); }); 
+Route::get('/dashboard', function () { return redirect('/dashboard/expeditions'); }); 
 Route::get('/dashboard/expeditions', function () { return view('admin/expeditions'); });
 Route::get('/dashboard/expeditions/detail', function () { return view('admin/expedition-detail'); });
 Route::get('/dashboard/stats', function () { return view('admin/statistique'); }); 

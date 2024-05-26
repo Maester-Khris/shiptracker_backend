@@ -8,8 +8,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons Fret Aerien -->
-    <link href="/assets/img/olbiz.jpg" rel="icon">
-    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="assets/img/olbiz.jpg" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,16 +19,16 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css"/>
 
     <!-- Vendor CSS Files -->
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="/assets/plugins/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/plugins/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="/assets/plugins/mdbootstrap/mdb_uikit_V7_2.min.css">
-    <link href="/assets/css/main.css" rel="stylesheet">
-    {{-- <script src="/assets/plugins/datatables/dataTables.bootstrap5.css"></script> --}}
+    <link rel="stylesheet" href="assets/plugins/mdbootstrap/mdb_uikit_V7_2.min.css">
+    <link href="assets/css/main.css" rel="stylesheet">
+    {{-- <script src="assets/plugins/datatables/dataTables.bootstrap5.css"></script> --}}
 
     <style>
         .swiper-pagination {
@@ -81,7 +81,7 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
-                <img src="/assets/img/logo_partial.png" alt="" style="max-height: 55px;">
+                <img src="assets/img/logo_partial.png" alt="" style="max-height: 55px;">
                 <h1>Olbizgo Express</h1>
             </a>
             <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -106,7 +106,7 @@
     <main id="main">
         <div class="breadcrumbs">
             <div class="page-header d-flex align-items-center"
-                style="background-image: url('/assets/img/page-header.jpg');">
+                style="background-image: url('assets/img/page-header.jpg');">
                 <div class="container position-relative">
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-6 text-center">
@@ -146,19 +146,19 @@
 
     <!-- <div id="preloader"></div> -->
     <!-- Vendor JS Files -->
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="/assets/vendor/aos/aos.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
 
     {{-- Personnal scripts and used Plugins --}}
-    <script src="/assets/plugins/swiper/swiper-bundle.min.js"></script>
-    <script src="/assets/plugins/mdbootstrap/mdb.umd.min.js"></script>
-    <script src="/assets/plugins/datatables/dataTables.bootstrap5.js"></script>
+    <script src="assets/plugins/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/plugins/mdbootstrap/mdb.umd.min.js"></script>
+    <script src="assets/plugins/datatables/dataTables.bootstrap5.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="/assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const inputFields = document.querySelectorAll('.tab-content .form-outline input');
