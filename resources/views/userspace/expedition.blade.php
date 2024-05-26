@@ -165,26 +165,27 @@
 
 
 @section('content')
-    <nav class="nav">
-        <a class="{{request()->has('detail') ? 'nav-link' : 'nav-link active' }}" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+    {{-- <nav class="nav"> --}}
+        {{-- <a class="{{request()->has('detail') ? 'nav-link' : 'nav-link active' }}" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
             type="button" aria-selected="true">Nouvel Envoi</a>
         <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-            type="button" aria-selected="false">Historique</a>
-        <a class="{{request()->has('detail') ? 'nav-link active' : 'nav-link' }}" id="details-tab" data-bs-toggle="tab" data-bs-target="#details"
-            type="button" aria-selected="false">Détails</a>
-    </nav>
+            type="button" aria-selected="false">Historique</a> 
+            {{request()->has('detail') ? 'nav-link active' : 'nav-link' }}--}}
+        {{-- <a class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details"
+            type="button" aria-selected="false">Détails</a> --}}
+    {{-- </nav> --}}
 
     <div class="tab-content" id="myTabContent">
 
         <!-- Tab N°1  -->
-        <div class="{{request()->has('detail') ? 'tab-pane fade' : 'tab-pane fade show active' }}" id="home" role="tabpanel" aria-labelledby="home-tab" style="margin: 10px 20px; margin-left:0px;">
+        {{-- <div class="{{request()->has('detail') ? 'tab-pane fade' : 'tab-pane fade show active' }}" id="home" role="tabpanel" aria-labelledby="home-tab" style="margin: 10px 20px; margin-left:0px;">
             <div style="background-color: #eee; padding:20px; border-radius: 10px; min-height:420px;">
                 @include('userspace/components/newexpedition')
             </div>
-        </div>
+        </div> --}}
         
         <!-- Tab N°2  -->
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="margin: 10px 20px; margin-left:0px;">
+        {{-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="margin: 10px 20px; margin-left:0px;">
             <div style="background-color: #eee; padding:20px; border-radius: 10px; min-height:420px;">
                 <div style="margin-bottom:20px;">
                     <h4>Liste des expeditions enregistrées</h4>
@@ -212,10 +213,11 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Tab N°3  -->
-        <div class="{{request()->has('detail') ? 'tab-pane fade show active' : 'tab-pane fade' }}" id="details" role="tabpanel" aria-labelledby="details-tab" style="margin: 10px 20px; margin-left:0px;">
+        {{-- {{request()->has('detail') ? 'tab-pane fade show active' : 'tab-pane fade' }} --}}
+        <div  id="details"  style="margin: 10px 0px;">
             <div style="margin:15px 0; ">
                 <h4>Consulter les détails</h4>
                 <form action="" style="margin-top: 20px;">

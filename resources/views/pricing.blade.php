@@ -3,7 +3,7 @@
 @section('content')
 @push('styles')
     <style>
-        h4{
+        .pricing-item h4{
             font-size: 26px!important;
             text-align: center;
             margin-bottom: 10px;

@@ -15,29 +15,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css"/>
 
     <!-- Vendor CSS Files -->
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="/assets/css/main.css" rel="stylesheet">
-
-    {{-- Personnal styles and used Plugins --}}
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css"
-      />
-    <link rel="stylesheet" href="/assets/plugins/mdbootstrap/mdb_uikit_V7_2.min.css">
-    <script src="/assets/plugins/datatables/dataTables.bootstrap5.css"></script>
     <link href="/assets/plugins/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/assets/plugins/mdbootstrap/mdb_uikit_V7_2.min.css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+    {{-- <script src="/assets/plugins/datatables/dataTables.bootstrap5.css"></script> --}}
 
     <style>
         .swiper-pagination {
@@ -54,7 +45,6 @@
             text-align: center;
             font-size: 18px;
             background: #fff;
-            /* Center slide text vertically */
             display: -webkit-box;
             display: -ms-flexbox;
             display: -webkit-flex;
@@ -68,20 +58,16 @@
             -webkit-align-items: center;
             align-items: center;
         }
-
         .form-outline input+i {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             pointer-events: none;
         }
-
-        /* userspace form input design */
         .tab-content .form-outline input {
             padding: 10px 15px;
             margin-bottom: 10px;
         }
-
         .tab-content .form-outline label {
             color: #3B71CA !important;
         }
@@ -102,8 +88,8 @@
             <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="/userspace/account" class="active">Mon compte</a></li>
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="/userspace/expeditions" class="active">Mon compte</a></li>
                     @if(Auth::user())
                     <li>
                         <a href="/userspace/signout" style="color:#D34642;">
@@ -118,7 +104,6 @@
 
 
     <main id="main">
-        <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs">
             <div class="page-header d-flex align-items-center"
                 style="background-image: url('/assets/img/page-header.jpg');">
@@ -140,14 +125,14 @@
             </nav>
         </div>
         
-        <section id="service-details" class="service-details">
-            <div class="container" data-aos="fade-up">
+        <section id="service-details" class="service-details" style="padding-top: 20px;">
+            <div class="container" data-aos="fade-up" style="margin-top: 10px;">
                 <div class="row gy-4">
                     <div class="col-lg-3">
-                        <div class="services-list" style="border: 0;">
-                            <a href="/userspace/expeditions" class="{{ $menu_item_title == "Expeditions" ? 'active' : '' }}">Expeditions</a>
+                        <div class="services-list" style="border: 0;margin-bottom:0px;padding-left:0px;">
+                            <a href="/userspace/expeditions" class="active" style="margin: 5px 0px;">Suivre mon expedition</a>
                             {{-- <a href="/userspace/estimator" class="{{ $menu_item_title == "Estimateur" ? 'active' : '' }}">Estimateur de cout</a> --}}
-                            <a href="/userspace/account" class="{{ $menu_item_title == "Parametre" ? 'active' : '' }}">Parametres du compte</a>
+                            {{-- <a href="/userspace/account" class="{{ $menu_item_title == "Parametre" ? 'active' : '' }}">Parametres du compte</a> --}}
                         </div>
                     </div>
                     <div class="col-lg-9">

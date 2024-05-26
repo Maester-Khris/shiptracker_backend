@@ -71,7 +71,7 @@ class UserController extends Controller
                     Auth::login($user, $remember = true);
                 }
                 Auth::login($user);
-                return redirect()->intended('/userspace/account');
+                return redirect()->intended('/userspace/expeditions');
             }else{
                 $request->json(["message"=>"incorrect credenation"],200); 
             }
