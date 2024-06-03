@@ -10,7 +10,10 @@ class Shipping extends Model
 {
     use HasFactory;
     protected $fillable = [
-       "reference_exp", "sender","receiver","user_id"
+       "sender","sender_telephone",
+       "receiver","receiver_telephone",
+       "receiver_address","delivery_town",
+       "reference_exp"
     ];
     protected $hidden = ['id','user_id','route_uuid','codebar_url',''];
 
@@ -29,6 +32,12 @@ class Shipping extends Model
         );
     }
 
+    public function step()
+    {
+        return $this->hasOne(Step::class);
+    }
+
+    // ========== old =======================
     protected function routePoints(): Attribute
     {
         $route = ShipRoute::where('route_uuid',$this->route_uuid)->first();

@@ -8,7 +8,6 @@ return new class extends Migration
 {
     public function up()
     {
-        
         // ON DELETE CASCADE
         Schema::create('preferences', function (Blueprint $table) {
             $table->id();

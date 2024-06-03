@@ -17,81 +17,81 @@ class UserController extends Controller
      * get & post
      * show form and exute process
     */
-    public function showSignup(){
-        return view('auth.signup');
-    }
-    public function signupUser(Request $request){
-        $existings_mail = User::where("email",$request->user_email)->exists();
-        if(!$existings_mail){
-            if($request->user_password == $request->user_password_confirm){
-                $user = User::create([
-                    "name" => $request->user_name,
-                    "password" => Hash::make($request->user_password),
-                    "telephone" => $request->user_tel,
-                    "email" => $request->user_email,
-                ])->preference()->create([
-                    "alert" => [
-                        'mail' => true,
-                        'sms' => false
-                    ]
-                ]);
-                return redirect()->intended('/userspace/account');
-            }else{
-                return back()->withErrors([
-                    "message"=>"Error, password dont match",
-                ]);
-            }           
-        }else{
-            return back()->withErrors([
-                "message"=>"unauthorized, existings user",
-            ]);
-        }
-        // ========== Store to try email verification ==============
-        // trigger registered event to auto send verifi email
-        // event(new Registered($user));
-        // $user->sendEmailVerificationNotification();
-        // auth()->login($user);
-    }
+    // public function showSignup(){
+    //     return view('auth.signup');
+    // }
+    // public function signupUser(Request $request){
+    //     $existings_mail = User::where("email",$request->user_email)->exists();
+    //     if(!$existings_mail){
+    //         if($request->user_password == $request->user_password_confirm){
+    //             $user = User::create([
+    //                 "name" => $request->user_name,
+    //                 "password" => Hash::make($request->user_password),
+    //                 "telephone" => $request->user_tel,
+    //                 "email" => $request->user_email,
+    //             ])->preference()->create([
+    //                 "alert" => [
+    //                     'mail' => true,
+    //                     'sms' => false
+    //                 ]
+    //             ]);
+    //             return redirect()->intended('/userspace/account');
+    //         }else{
+    //             return back()->withErrors([
+    //                 "message"=>"Error, password dont match",
+    //             ]);
+    //         }           
+    //     }else{
+    //         return back()->withErrors([
+    //             "message"=>"unauthorized, existings user",
+    //         ]);
+    //     }
+    //     // ========== Store to try email verification ==============
+    //     // trigger registered event to auto send verifi email
+    //     // event(new Registered($user));
+    //     // $user->sendEmailVerificationNotification();
+    //     // auth()->login($user);
+    // }
 
     /** =========== Sign IN ===============
      * get & post
      * show form and exute process
      * katlynn03@example.com
     */
-    public function showSignin(){
-        return view('auth.login');
-    }
-    public function signinUser(Request $request){
-        $user = User::where("email",$request->user_email)->first();
-        if($user->exists()){
-            $is_pass_correct = Hash::check($request->user_password, $user->password);
-            if($is_pass_correct){
-                $request->session()->regenerate();
-                if($request->user_remember == 1){
-                    Auth::login($user, $remember = true);
-                }
-                Auth::login($user);
-                return redirect()->intended('/userspace/expeditions');
-            }else{
-                $request->json(["message"=>"incorrect credenation"],200); 
-            }
-        }else{
-            $request->json(["message"=>"No user found"],404); 
-        }
-        // return redirect()->route('home')->withInput([
-        //     "message"=>"successul registration", 
-        //     "data"=>$user->toJson()
-        // ]);
-        // $request->json(["message"=>"successful auth", "data"=>$user->toJson()],200);
-    }
+    // public function showSignin(){
+    //     return view('auth.login');
+    // }
+    // public function signinUser(Request $request){
+    //     $user = User::where("email",$request->user_email)->first();
+    //     if($user->exists()){
+    //         $is_pass_correct = Hash::check($request->user_password, $user->password);
+    //         if($is_pass_correct){
+    //             $request->session()->regenerate();
+    //             if($request->user_remember == 1){
+    //                 Auth::login($user, $remember = true);
+    //             }
+    //             Auth::login($user);
+    //             return redirect()->intended('/userspace/expeditions');
+    //         }else{
+    //             $request->json(["message"=>"incorrect credenation"],200); 
+    //         }
+    //     }else{
+    //         $request->json(["message"=>"No user found"],404); 
+    //     }
+    //     // return redirect()->route('home')->withInput([
+    //     //     "message"=>"successul registration", 
+    //     //     "data"=>$user->toJson()
+    //     // ]);
+    //     // $request->json(["message"=>"successful auth", "data"=>$user->toJson()],200);
+    // }
 
-    public function signOutUser(Request $request){
-        $user = Auth::user();
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('login');
-    }
+    // public function signOutUser(Request $request){
+    //     $user = Auth::user();
+    //     Auth::logout();
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
+    //     return redirect()->route('login');
+    // }
 
 
     /**

@@ -3,6 +3,10 @@
 #  =================== WORK AVANCEMENT ===================
             ⚠️ - ❌ - ⭕️ - 💯 - 🔘 - ✅
 
+- Database init
+    - create role: staff, administrator, user guest
+    - create permission: 
+
 - Main Func
     + Generate and save UPC_A / UPC_E barcode
         * state ✅: working 
@@ -83,3 +87,38 @@
 Telephone Sm
 
 Ordinateur HP
+
+<!-- mOVE AUTH METHOD FROM USER CONTROLLER TO A AUTH CONTROLL SINCE ???? -->
+
+<!-- message table -->
+default: information
+other: reclamation
+for a reclamation the subject is the of message is the object of complaint
+
+<!-- Html Mail view id -->
+1: Simple mail
+2: anwser to simple message
+3: answer to claim
+
+Remeber tutorial how to use spatie role and permision middleware ?
+
+<!-- usable code for later -->
+<!-- route file -->
+<!-- Route::group(['middleware' => ['role:super-admin|admin']], function() {
+    Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+    Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::get('roles/{roleId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
+    Route::get('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole']);
+    Route::put('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionToRole']);
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::get('users/{userId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
+}); -->
+<!-- controler constructor -->
+<!-- public function __construct()
+    {
+        $this->middleware('permission:view role', ['only' => ['index']]);
+        $this->middleware('permission:create role', ['only' => ['create','store','addPermissionToRole','givePermissionToRole']]);
+        $this->middleware('permission:update role', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete role', ['only' => ['destroy']]);
+    } -->

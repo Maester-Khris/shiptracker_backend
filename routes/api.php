@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post("/login", 'App\Http\Controllers\RestController@connectUser');
-Route::get("/logout", 'App\Http\Controllers\RestController@deconnectUser');
+Route::post("/login", 'App\Http\Controllers\AuthController@signinRemoteUser');
+Route::get("/logout", 'App\Http\Controllers\AuthController@signoutRemoteUser');
 
 Route::post("/user/shippings", 'App\Http\Controllers\RestController@getUserShippings');
 Route::post("/user/shippings/detail", 'App\Http\Controllers\RestController@getUserShippingDetail');

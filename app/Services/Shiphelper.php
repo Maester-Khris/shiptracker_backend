@@ -51,10 +51,8 @@ class Shiphelper{
      * Inputs: Colis (poids - longueur - largeur - hauteur) in cm
      * Process: each colis determine billed weight (volumetric vs real)
      * Result: billed weight * freight offer (in usd)
+     * data = [["weight"=> 10, "length"=> 250, "width"=> 75, "height"=> 100 ]]
     */
-    // $data = [
-    //     ["weight"=> 10, "length"=> 250, "width"=> 75, "height"=> 100 ]
-    // ];
     public static function costEstmator($data){
         $FREIGHT_OFFER = 12;
         $TOTAL_COST = [];
@@ -78,7 +76,6 @@ class Shiphelper{
                 $TOTAL_COST[] = $billed_w * $FREIGHT_OFFER;
             }
         }
-        // $costs = collect($TOTAL_COST)->sum();
         return $TOTAL_COST;
     }
 

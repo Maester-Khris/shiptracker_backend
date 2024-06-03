@@ -12,67 +12,32 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card-box table-responsive">
-
                             <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Expediteur</th>
+                                        <th>Code Expedition</th>
+                                        <th>Expediteur Nom</th>
+                                        <th>Expediteur Telephone</th>
                                         <th>Destinataire Nom</th>
                                         <th>Destinataire Telephone</th>
-                                        <th>Num Colis</th>
-                                        <th>Date Création</th>
+                                        <th>Nombre Colis</th>
                                         <th>Date Départ</th>
+                                        <th>Statut Expéd</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>Euioh Morton</td>
-                                        <td>+33 334 545 656</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>Euioh Morton</td>
-                                        <td>+33 334 545 656</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>Euioh Morton</td>
-                                        <td>+33 334 545 656</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>Euioh Morton</td>
-                                        <td>+33 334 545 656</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>Euioh Morton</td>
-                                        <td>+33 334 545 656</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>Euioh Morton</td>
-                                        <td>+33 334 545 656</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
+                                    @foreach ($shippings as $item)
+                                        <tr>
+                                            <td>{{$item->reference_exp}}</td>
+                                            <td>{{$item->sender}}</td>
+                                            <td>{{$item->sender_telephone}}</td>
+                                            <td>{{$item->receiver}}</td>
+                                            <td>{{$item->receiver_telephone}}</td>
+                                            <td>{{count($item->packages)}}</td>
+                                            <td>{{$item->created_at}}</td>
+                                            <td>{{$item->status_exp}}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

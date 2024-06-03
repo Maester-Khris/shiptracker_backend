@@ -4,3 +4,6 @@
     * update users set password = '$2y$10$sccQ66V4hg8MvRyxve11WeDJgG76vPSn6F2PGyviOtiEmbXnZUK26' where id in (1,2);
 
 # Web forcer la redirection http en https
+
+#update database online
+- new table message

@@ -10,6 +10,7 @@
     <title>Olbizgo Dashboard</title>
 
     <link href="/assets/admin/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/admin/plugins/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="/assets/admin/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/admin/plugins/nprogress/nprogress.css" rel="stylesheet">
     <link href="/assets/admin/plugins/iCheck/skins/flat/green.css" rel="stylesheet">
@@ -105,6 +106,8 @@
 
     <script src="/assets/admin/plugins/jquery/dist/jquery.min.js"></script>
     <script src="/assets/admin/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/admin/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/admin/plugins/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="/assets/admin/plugins/fastclick/lib/fastclick.js"></script>
     <script src="/assets/admin/plugins/nprogress/nprogress.js"></script>
     <script src="/assets/admin/plugins/Chart.js/dist/Chart.min.js"></script>
@@ -124,15 +127,7 @@
     
 
     <script src="/assets/admin/plugins/moment/min/moment.min.js"></script>
-    
-
     <script src="/assets/admin/custom.min.js"></script>
-
-    <!-- JQVMap -->
-    {{-- <script src="assets/admin/plugins/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="assets/admin/plugins/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="assets/admin/plugins/jqvmap/examples/js/jquery.vmap.sampledata.js"></script> --}}
-    {{-- <script src="assets/admin/plugins/bootstrap-daterangepicker/daterangepicker.js"></script> --}}
-	
+    @stack('scripts')
   </body>
 </html>

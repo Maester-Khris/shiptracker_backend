@@ -9,7 +9,6 @@ use App\Services\Barcode;
 use App\Mail\ShiptrackerMail;
 use App\Jobs\SendMail;
 use Illuminate\Support\Facades\Mail;
-use Courier;
 
 class FeatureController extends Controller
 {
@@ -41,7 +40,7 @@ class FeatureController extends Controller
         ];
         
         // ======== single mail =========
-        Mail::to($mail_recipient)->send(new ShiptrackerMail($name, $mail_subj));
+        // Mail::to($mail_recipient)->send(new ShiptrackerMail($name, $mail_subj, $cont, $viewid));
 
         // ======== bulk ===========
         // $recipients = [

@@ -19,7 +19,7 @@ class ShiptrackerMail extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(private $name, private $subj)
+    public function __construct(private $name, private $subj, private $content, private $mailViewId)
     {
         //
     }
@@ -34,9 +34,16 @@ class ShiptrackerMail extends Mailable implements ShouldQueue
     
     public function content()
     {
+        if($this->mailViewId == 2){
+            $viewToUse='mail.message-answer';
+        }else if($this->mailViewId == 3){
+            $viewToUse='mail.claim-answer';
+        }else{
+            $viewToUse='mail.simplemail';
+        }
         return new Content(
-            view: 'mail.simplemail',
-            with: ['name' => $this->name],
+            view: $viewToUse,
+            with: ['name' => $this->name, 'content' => $this->content],
         );
     }
 

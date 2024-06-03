@@ -155,6 +155,12 @@ class ShipController extends Controller
             ->get();
         return response()->json($ships->toJson(), 200);
     }
+
+
+
+    /**
+     * ============== OLD functions ============== 
+    */
     public function estimateCost(Request $request){
         $result = $this->shipService::singleCostEstmator($request->package_infos);
         return response()->json($result, 200);

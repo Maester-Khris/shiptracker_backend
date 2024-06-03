@@ -10,7 +10,7 @@
         dd(Auth::user());
     @endphp --}}
     {{-- <p>username is {{Auth::user()->name}}</p> --}}
-    <button id="welcome">Click me to test Shipping ordering </button>
+    {{-- <button id="welcome">Click me to test Shipping ordering </button>
     <button id="launch">Click me to test Shipping launch </button>
     <button id="update">Click me to test shipping status update </button>
     <button id="next">Click me to test shipping route next points </button>
@@ -78,7 +78,30 @@
             });
             console.log("loading finished");
         });
-    </script>
+    </script> --}}
+
+
+    <table>
+        <thead>
+            <td>exped</td>
+            <td>clients</td>
+            <td>steps</td>
+            <td>packages</td>
+        </thead>
+        <tr>
+            {{-- @foreach($details as $line) --}}
+                {{-- @php
+                    dd($linee);
+                @endphp --}}
+                <td>{{$details->ship_details['reference']}}</td>
+                <td>{{$details->client_details['sender_name']}}</td>
+                <td>{{count($details->step_details)}}</td>
+                <td>{{count($details->packages)}}</td>
+            {{-- @endforeach --}}
+
+           
+        </tr>
+    </table>
 </body>
 </html>
 
