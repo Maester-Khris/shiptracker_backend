@@ -58,9 +58,9 @@ Route::middleware(['auth'])->group(function () {
 
 
 // ================ Special Feature Routes: Mail Verification =====================
-Route::get('/user/verify-email', function () {return view('services');})->middleware('auth')->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', 'MailVerificationController@verifyEmail')->middleware('signed')->name('verification.verify');
-Route::post('/email/resend', 'MailVerificationController@resendVerificationLink')->middleware('throttle:6,1')->name('verification.resend');
+// Route::get('/user/verify-email', function () {return view('services');})->middleware('auth')->name('verification.notice');
+// Route::get('/email/verify/{id}/{hash}', 'MailVerificationController@verifyEmail')->middleware('signed')->name('verification.verify');
+// Route::post('/email/resend', 'MailVerificationController@resendVerificationLink')->middleware('throttle:6,1')->name('verification.resend');
 
 
 // ================== Test Routes: Behaviour and Features =========================
@@ -76,3 +76,5 @@ Route::get('/newBarcode','App\Http\Controllers\FeatureController@barcode');
 // Route::post('/userspace/account/edit', 'App\Http\Controllers\UserController@updateUserInfo' );
 // Route::get('/userspace/estimator', 'App\Http\Controllers\ShipController@userspace_estimator');
 // Route::post('/userspace/package-estimator', 'App\Http\Controllers\ShipController@estimateCost');
+
+

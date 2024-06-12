@@ -15,6 +15,7 @@ use App\Models\User;
 
 use App\Models\Route;
 use App\Models\Step;
+use Illuminate\Support\Facades\Crypt;
 
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -49,35 +50,42 @@ class DatabaseSeeder extends Seeder
         '+237 9 87 65 43 21',
         '+237 3 21 54 76 98',
         '+237 7 65 43 21 09'];
-
         
-        // 0- Initialisation
+        // =========================== Database Initilisation ==============================
+        // 0- Roles
         $adminrole = Role::create(['name' => 'Admin']);
         $staffrole = Role::create(['name' => 'Staff member']);
         $guestrole = Role::create(['name' => 'Guest user']);
 
+        // 1- Work account, Routes with steps
         $admin = User::create([
             "name" => "Admin Olbizgo",
             "password" => Hash::make('test admin'),
             "telephone" => $faker->randomElement($numswiss),
-            "email" => "olbizgo@admin.com",
+            "email" => "admin@olbizgo.com",
         ])->assignRole($adminrole);
         $staff_member = User::create([
-            "name" => $faker->name(),
-            "password" => Hash::make('test staff'),
-            "telephone" => $faker->randomElement($numfrance),
-            "email" => $faker->unique()->safeEmail()
-        ])->assignRole($staffrole);
-        $guest = User::create([
-            "name" => $faker->name(),
-            "password" => Hash::make('test guest'),
+            "name" => "Nathan C",
+            "password" => Crypt::encryptString('test staff'),
             "telephone" => $faker->randomElement($numcamer),
-            "email" => $faker->unique()->safeEmail()
+            "email" => "nathan@olbizgo.com"
+        ])->assignRole($staffrole);
+        $staff_member2 = User::create([
+            "name" => "Joel N",
+            "password" => Crypt::encryptString('test staff'),
+            "telephone" => $faker->randomElement($numcamer),
+            "email" => "joel@olbizgo.com"
+        ])->assignRole($staffrole);
+
+        // 2- Guest account,
+        $guest = User::create([
+            "name" => "Franklin Dubois",
+            "password" => Crypt::encryptString('test guest'),
+            "telephone" => $faker->randomElement($numfrance),
+            "email" => "franklin@gmail.com"
         ])->assignRole($guestrole);
 
-
-
-
+        // 3- Routes with steps
         Route::create(['name' => 'Route principale'])
             ->steps()
             ->createMany([
@@ -96,16 +104,16 @@ class DatabaseSeeder extends Seeder
         */
         
         // 1- create shipping with basic info: sender, receiver, code and packages 
-        $packages = ShipPackage::factory(3)->create();
-        $shipping = Shipping::create([
-            'sender' => $faker->name(),
-            'sender_telephone' => $faker->name(),
-            'receiver' => $faker->name(),
-            'receiver_telephone' => $faker->name(),
-            "receiver_address" => $faker->name(),
-            "delivery_town" => $faker->name(),
-            'reference_exp' => $faker->randomNumber(8, true),
-        ])->packages()->saveMany($packages);
+        // $packages = ShipPackage::factory(3)->create();
+        // $shipping = Shipping::create([
+        //     'sender' => $faker->name(),
+        //     'sender_telephone' => $faker->name(),
+        //     'receiver' => $faker->name(),
+        //     'receiver_telephone' => $faker->name(),
+        //     "receiver_address" => $faker->name(),
+        //     "delivery_town" => $faker->name(),
+        //     'reference_exp' => $faker->randomNumber(8, true),
+        // ])->packages()->saveMany($packages);
         
 
         // 2- update shipping: Launch
@@ -113,7 +121,7 @@ class DatabaseSeeder extends Seeder
         // $route = Route::find(1);
         // $route_first_step = $route->steps()->orderBy('created_at', 'asc')->first();
 
-        // $shipping = Shipping::where("reference_exp","87733873")->first();
+        // $shipping = Shipping::where("reference_exp","60096236")->first();
         // $shipping->departure_date = $today;
         // $shipping->codebar_url = $faker->name(); 
         // $shipping->codebar_digit = $faker->randomNumber(8, true);
@@ -154,26 +162,5 @@ class DatabaseSeeder extends Seeder
         //     $shipping->arrival_date = Carbon::now();
         // }
         // $shipping->save();
-
-
-    
-        // ========= Shipping Process v1.0 ==================
-        // for($i=0; $i<=4; $i++){
-        //     $packages = ShipPackage::factory(3)->create();
-        //     $user = $faker->randomElement($users);
-        //     $route = $faker->randomElement($routes);
-        //     $shipping = Shipping::create([
-        //         'reference_exp' => "SHIP". $faker->randomNumber(8, true),
-        //         'sender' => $faker->name(),
-        //         'receiver' => $faker->name(),
-        //         'codebar_digit' => $faker->randomNumber(8, true),
-        //         'actual_point_id' => $route->route_points[0]['point_id'],
-        //         'route_uuid' => $route->route_uuid,
-        //         'user_id' => $user->id,
-        //         'departure_date' => Carbon::now(),
-        //     ])->packages()
-        //         ->saveMany($packages);
-        // }
-
     }
 }

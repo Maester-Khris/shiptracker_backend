@@ -10,7 +10,7 @@
     @endpush
 
     @push('scripts')
-        <script src="assets/js/axios.min.js"></script>
+        <script src="/assets/js/axios.min.js"></script>
         <script>    	
             document.addEventListener("DOMContentLoaded",function(){
                 var swiper = new Swiper('.swiper-container', {
@@ -24,78 +24,78 @@
                 });
 
                 // =============== Nav Tab 1: Shipping form and order ================
-                var add_colis = document.querySelector('#new-colis');
-                var add_colis_complete = document.querySelector('#new-colis-complete');
-                var order_ship = document.querySelector('#order-ship');
-                var colis_data = [];
-                add_colis.addEventListener("click",function(e){
-                    e.preventDefault();   
-                    colis_data.push({
-                        description: document.querySelector('#new-colis-desc').value,
-                        height: document.querySelector('#new-colis-height').value,
-                        width: document.querySelector('#new-colis-width').value,
-                        weight: document.querySelector('#new-colis-weight').value,
-                        length: document.querySelector('#new-colis-length').value,
-                    });
-                    console.log(colis_data);
-                    document.querySelector('#new-colis-desc').value="";
-                    document.querySelector('#new-colis-height').value="";
-                    document.querySelector('#new-colis-width').value="";
-                    document.querySelector('#new-colis-weight').value="";
-                    document.querySelector('#new-colis-length').value="";
-                });
-                add_colis_complete.addEventListener("click",function(e){
-                    e.preventDefault();
-                    axios.post('/userspace/package-estimator',{package_infos:colis_data}).then(function(response){
-                        let costs = response.data;
-                        let total_cost = costs.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-                        let newdata = colis_data.map((line, index)=>({
-                            ...line,
-                            ['cost']: costs[index]
-                        }));
-                        newdata.forEach((line, counter) =>{
-                            const new_tr = document.createElement('tr');
-                            const new_td_label = document.createElement('td');
-                            const new_td_des = document.createElement('td');
-                            const new_td_cost = document.createElement('td');
-                            new_td_label.innerText = `Paquet ${counter+1}`;
-                            new_td_des.innerText = `${line.height} x ${line.width} x ${line.weight}`;
-                            new_td_cost.innerText = `Fcfa ${line.cost}`;
-                            new_tr.append(new_td_label, new_td_des, new_td_cost);
-                            document.querySelector('.recap-lines').append(new_tr);
-                        });
-                        const new_tr_total = document.createElement('tr');
-                        const new_td_total_label = document.createElement('td');
-                        const new_td_total_cost = document.createElement('td');
-                        new_td_total_label.setAttribute('colspan', '2');
-                        new_td_total_label.innerText = 'Total:';
-                        new_td_total_cost.innerText = `Fcfa ${total_cost}`;
-                        new_tr_total.append(new_td_total_label, new_td_total_cost);
-                        document.querySelector('.recap-lines').append(new_tr_total);
-                    });
-                    document.querySelector('.add-colis-form').classList.add('d-none');
-                    document.querySelector('.recap-colis').classList.remove('d-none');
-                });
-                order_ship.addEventListener("click",function(e){
-                    e.preventDefault(); 
-                    shipdata = {
-                        receiver: document.querySelector("#ship_receiver_name").value,
-                        packages: colis_data
-                    }
-                    axios.post('/userspace/expeditions/new-order',shipdata).then(response =>{
-                        console.log("order registered");
-                    });
-                });
+                // var add_colis = document.querySelector('#new-colis');
+                // var add_colis_complete = document.querySelector('#new-colis-complete');
+                // var order_ship = document.querySelector('#order-ship');
+                // var colis_data = [];
+                // add_colis.addEventListener("click",function(e){
+                //     e.preventDefault();   
+                //     colis_data.push({
+                //         description: document.querySelector('#new-colis-desc').value,
+                //         height: document.querySelector('#new-colis-height').value,
+                //         width: document.querySelector('#new-colis-width').value,
+                //         weight: document.querySelector('#new-colis-weight').value,
+                //         length: document.querySelector('#new-colis-length').value,
+                //     });
+                //     console.log(colis_data);
+                //     document.querySelector('#new-colis-desc').value="";
+                //     document.querySelector('#new-colis-height').value="";
+                //     document.querySelector('#new-colis-width').value="";
+                //     document.querySelector('#new-colis-weight').value="";
+                //     document.querySelector('#new-colis-length').value="";
+                // });
+                // add_colis_complete.addEventListener("click",function(e){
+                //     e.preventDefault();
+                //     axios.post('/userspace/package-estimator',{package_infos:colis_data}).then(function(response){
+                //         let costs = response.data;
+                //         let total_cost = costs.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+                //         let newdata = colis_data.map((line, index)=>({
+                //             ...line,
+                //             ['cost']: costs[index]
+                //         }));
+                //         newdata.forEach((line, counter) =>{
+                //             const new_tr = document.createElement('tr');
+                //             const new_td_label = document.createElement('td');
+                //             const new_td_des = document.createElement('td');
+                //             const new_td_cost = document.createElement('td');
+                //             new_td_label.innerText = `Paquet ${counter+1}`;
+                //             new_td_des.innerText = `${line.height} x ${line.width} x ${line.weight}`;
+                //             new_td_cost.innerText = `Fcfa ${line.cost}`;
+                //             new_tr.append(new_td_label, new_td_des, new_td_cost);
+                //             document.querySelector('.recap-lines').append(new_tr);
+                //         });
+                //         const new_tr_total = document.createElement('tr');
+                //         const new_td_total_label = document.createElement('td');
+                //         const new_td_total_cost = document.createElement('td');
+                //         new_td_total_label.setAttribute('colspan', '2');
+                //         new_td_total_label.innerText = 'Total:';
+                //         new_td_total_cost.innerText = `Fcfa ${total_cost}`;
+                //         new_tr_total.append(new_td_total_label, new_td_total_cost);
+                //         document.querySelector('.recap-lines').append(new_tr_total);
+                //     });
+                //     document.querySelector('.add-colis-form').classList.add('d-none');
+                //     document.querySelector('.recap-colis').classList.remove('d-none');
+                // });
+                // order_ship.addEventListener("click",function(e){
+                //     e.preventDefault(); 
+                //     shipdata = {
+                //         receiver: document.querySelector("#ship_receiver_name").value,
+                //         packages: colis_data
+                //     }
+                //     axios.post('/userspace/expeditions/new-order',shipdata).then(response =>{
+                //         console.log("order registered");
+                //     });
+                // });
 
 
                 // ============ Nav Tab 2: Shipping list copy ref code =============
-                var copy_buttons = document.querySelectorAll(".copy_button");
-                copy_buttons.forEach(btn =>{
-                    btn.addEventListener("click",function(){
-                        let span_text = btn.previousElementSibling;
-                        navigator.clipboard.writeText(span_text.innerText);
-                    })
-                });
+                // var copy_buttons = document.querySelectorAll(".copy_button");
+                // copy_buttons.forEach(btn =>{
+                //     btn.addEventListener("click",function(){
+                //         let span_text = btn.previousElementSibling;
+                //         navigator.clipboard.writeText(span_text.innerText);
+                //     })
+                // });
 
                 // ========= Nav Tab 3: Shipping detail road and packages ==========
                 var detail_button = document.querySelector('.detail-seach-btn');
@@ -111,16 +111,18 @@
                 detail_button.addEventListener('click',function(e){
                     e.preventDefault();
                     axios.post('/userspace/expedition/get-barcode',{shipcode:shipcode_input.value}).then(function(response){
-                        console.log(response.data);
+                        // console.log(response.data);
+                        // for production
+                        // document.querySelector('#ship-barcode').src= `/public${response.data.img}`;
                         if(response.data.img){
-                            let imgsrc = response.data.img;
-                            // document.querySelector('#ship-barcode').src="{{ Storage::disk('local')->url("+imgsrc+") }}";
+                            document.querySelector('#ship-barcode').src= `/public${response.data.img}`; 
                         }
                     }); 
-                    axios.post('/userspace/expeditions/details',{ship_reference:shipcode_input.value}).then(function(response){
-                        var shipping = JSON.parse(response.data.data);
+                    axios.post('/userspace/expeditions/details',{shipcode:shipcode_input.value}).then(function(response){
+                        // console.log(shipping);
+                        var shipping = response.data;
                         document.querySelector('.route-wrapper').innerHTML="";
-                        console.log(shipping);
+                        
                         // add Route points
                         shipping.route_points.forEach((point, index) => {
                             let stageItem = document.importNode(routeStage_template.content, true);
@@ -129,8 +131,8 @@
                             let flight_icon = iconItem.querySelector('i:first-child');
                             let passed_icon = iconItem.querySelector('i:last-child');
                             
-                            stageItem.querySelector('h4').innerText = `${point.point_name}`;
-                            if(point.point_id >= shipping.actual_point_id ){
+                            stageItem.querySelector('h4').innerText = `${point.step_name}`;
+                            if(point.step_running_flag == true  ){
                                 stageItem.querySelector('.stage-icon').append(flight_icon)
                             }else{
                                 stageItem.querySelector('.stage-icon').append(passed_icon)
@@ -148,9 +150,9 @@
                         // add  Packages
                         shipping.packages.forEach((pack, index) => {
                             let packageItem = document.importNode(pacakge_template.content, true);
-                            packageItem.querySelector('h4').innerText = `Colis N° ${index}`;
+                            packageItem.querySelector('h4').innerText = `Colis N° ${index+1}`;
                             packageItem.querySelector('.desc').innerText = `${pack.description}`;
-                            packageItem.querySelector('.volum').innerText = `(25 x 34 x ${pack.weight})`;
+                            packageItem.querySelector('.volum').innerText = `(${pack.weight}) Kg`;
                             slide_wrapper.appendChild(packageItem);
                         });
                         // Show point and packaes
@@ -248,8 +250,8 @@
                     </div>
                     <div class="col-md-5" style="margin: auto 0px;">
                         <div class="position-relative" style="margin-bottom: 30px; text-align:center;">
-                            <img id="ship-barcode" src="assets/img/no-barcode.png" class="img-thumbnail" alt="ship bar code" style="height: 80px; width:200px;margin-bottom: 5px;">
-                            {{-- <img id="ship-barcode" src="{{ Storage::disk('local')->url("barcodes/code_6.jpg") }}" class="img-thumbnail" alt="ship bar code" style="height: 80px; width:200px;margin-bottom: 5px;"> --}}
+                            {{-- <img id="ship-barcode" src="" class="img-thumbnail" alt="ship bar code" style="height: 80px; width:200px;margin-bottom: 5px;"> --}}
+                            <img id="ship-barcode" src="{{ Storage::disk('local')->url("barcodes/code_6.jpg") }}" class="img-thumbnail" alt="ship bar code" style="height: 80px; width:200px;margin-bottom: 5px;">
                             <i class="position-absolute icon-clickable ph-bold ph-download-simple" style="top:3px; right:3px;font-size:15px;"></i>
                             <h5 style="font-size:18px,">Code bar de l'expédition</h5>
                         </div>
@@ -263,7 +265,6 @@
             </div>
         </div>
     </div>
-
 
     @include('userspace/components/codetemplate')
 @endsection

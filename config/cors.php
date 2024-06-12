@@ -15,9 +15,9 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'api/shipping/test', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['GET', 'POST', 'PUT'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'OPTIONS'],
 
     'allowed_origins' => ['http://localhost:8100', 'http://localhost:8101', 'https://localhost'],
 
@@ -32,3 +32,4 @@ return [
     'supports_credentials' => false,
 
 ];
+// 'http://localhost:8100', 'http://localhost:8101', 'https://localhost'

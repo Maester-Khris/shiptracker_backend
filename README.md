@@ -30,7 +30,7 @@
             * shipping with null on (last checked point, departure, arrival, reference_exp, codebarurl)
             * shipping init: sender, receiver, packages, status_exp, user_id, reference_exp
         * ship tracking: what to display ✅
-            * status: 1-ORDERED | 2-DEPOSITED | 3-ON WAY | 4-ARRIVED | 5-DELIVERED
+            * status: 1-ORDERED | 2-DEPOSITED | 3-ONWAY | 4-ARRIVED | 5-DELIVERED
             * ship infos: barcode, departure, last checked referal point, each package description
         * shipping history: ✅
             * all shippings with details (departure, arrival, status, number of package, total weight)
@@ -65,6 +65,7 @@
     * Package model!
         * change weight to infos: height x width x lenght x weight
 
+- how to secure data: user password (no visible in html or js inspect) if sended through server response no visible through network request examination
 
     
 - Model Understanding 
@@ -84,6 +85,9 @@
         * user informations with update forms
         * user preferences
     
+
+<!-- Old key = base64:gizjjLr8xL5nNvw5j4EBW0aRgp84dzlQu9W/S3wsa2g= -->
+
 Telephone Sm
 
 Ordinateur HP

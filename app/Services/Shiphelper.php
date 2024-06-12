@@ -89,7 +89,7 @@ class Shiphelper{
                 $status = "DEPOSITED";
                 break;
             case 3:
-                $status = "ON WAY";
+                $status = "ONWAY";
                 break;
             case 4:
                 $status = "ARRIVED";

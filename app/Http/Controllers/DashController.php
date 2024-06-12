@@ -7,14 +7,17 @@ use App\Models\User;
 use App\Models\Route;
 use App\Models\Message;
 use App\Models\Shipping;
+use App\Mail\ShiptrackerMail;
+use App\Traits\ShippingOperation;
+use Spatie\Permission\Models\Role;
 
+use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ShiptrackerMail;
-use Spatie\Permission\Models\Role;
-use App\Traits\ShippingOperation;
-use Hash;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class DashController extends Controller
@@ -32,8 +35,9 @@ class DashController extends Controller
     }
     public function getExpeditionDetail(Request $request){
         if(isset($request->shipcode)){
+            $shipcode = $request->shipcode;
             $details = $this->shippingDetails($request->shipcode);
-            return view("admin.expedition-detail")->with(compact('details'));
+            return view("admin.expedition-detail")->with(compact('details'))->with(compact('shipcode'));
         }else{
             $default_route = Route::find(1);
             $default_route_steps = $default_route->steps;
@@ -67,10 +71,11 @@ class DashController extends Controller
     }
     public function createStaffAccount(Request $request){
         // validate if bad back with input
+        // "password" => Hash::make($request->staff_password),
         $staffrole = Role::where('name','Staff member')->first();
         $staff_member = User::create([
             "name" => $request->staff_name,
-            "password" => Hash::make($request->staff_password),
+            "password" => Crypt::encryptString($request->staff_password),
             "telephone" => $request->staff_tel,
             "email" => $request->staff_email,
         ]);
@@ -80,7 +85,7 @@ class DashController extends Controller
     }
     public function regeneratePassword(Request $request){
         $user = User::where('email', $request->account_email)->first();
-        $user->password = Hash::make($this->generatePass());
+        $user->password = Crypt::encryptString($this->generatePass());
         $user->save();
         session()->flash('pass_status', 'Le Mot de passe de $user->name a bien été mis à jour !');
         return back();

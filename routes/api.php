@@ -17,13 +17,23 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+// Route::middleware('auth:sanctum')->get("/test", 'App\Http\Controllers\RestController@getSomeInfo');
+
 
 Route::post("/login", 'App\Http\Controllers\AuthController@signinRemoteUser');
-Route::get("/logout", 'App\Http\Controllers\AuthController@signoutRemoteUser');
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get("/shippings", 'App\Http\Controllers\RestController@allShippings');
+    Route::post("/shipping/exist",'App\Http\Controllers\RestController@checkShippingExist');
+    Route::post("/shippings/detail", 'App\Http\Controllers\RestController@getShippingDetail');
+    Route::post("/shippings/detail-limited", 'App\Http\Controllers\RestController@getLimitedDetail');
 
-Route::post("/user/shippings", 'App\Http\Controllers\RestController@getUserShippings');
-Route::post("/user/shippings/detail", 'App\Http\Controllers\RestController@getUserShippingDetail');
+    Route::post("/shippings/add-one", 'App\Http\Controllers\RestController@ShippingNew');
+    Route::post("/shipping/update-step", 'App\Http\Controllers\RestController@ShippingNewStep');
+    Route::post("/shipping/update-status", 'App\Http\Controllers\RestController@ShippingNewStatus');
 
+    
+    Route::post("/shipfolder/saveImage", 'App\Http\Controllers\RestController@uploadImage');
+    Route::get("/logout", 'App\Http\Controllers\AuthController@signoutRemoteUser');
+});
 
-// Route::middleware('auth:sanctum')->get("/test", 'App\Http\Controllers\RestController@getSomeInfo');
 Route::get("/test", 'App\Http\Controllers\RestController@getSomeInfo');

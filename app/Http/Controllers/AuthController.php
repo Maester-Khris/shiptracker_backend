@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Crypt;
 
 class AuthController extends Controller
 {
@@ -18,7 +19,7 @@ class AuthController extends Controller
             if($request->user_password == $request->user_password_confirm){
                 $user = User::create([
                     "name" => $request->user_name,
-                    "password" => Hash::make($request->user_password),
+                    "password" => Crypt::encryptString($request->user_password),
                     "telephone" => $request->user_tel,
                     "email" => $request->user_email,
                 ])->assignRole($guestrole);
@@ -46,7 +47,7 @@ class AuthController extends Controller
     public function signinGuestUser(Request $request){
         $user = User::where("email",$request->user_email)->first();
         if($user->exists()){
-            $is_pass_correct = Hash::check($request->user_password, $user->password);
+            $is_pass_correct = $request->user_password == Crypt::decryptString($user->password) ? true : false;
             if($is_pass_correct){
                 $request->session()->regenerate();
                 if($request->user_remember == 1){
@@ -55,26 +56,29 @@ class AuthController extends Controller
                 Auth::login($user);
                 return redirect()->intended('/userspace/expeditions');
             }else{
-                $request->json(["message"=>"incorrect credenation"],200); 
+               return response()->json(["message"=>"incorrect credenation"],200); 
             }
         }else{
-            $request->json(["message"=>"No user found"],404); 
+           return response()->json(["message"=>"No user found"],404); 
         }
     }
     public function signinRemoteUser(Request $request){
-        $user = User::where("email",$request->email)->first();
-        if($user->exists()){
-            $is_pass_correct = Hash::check($request->password, $user->password);
+        $user = User::whereHas("roles", function ($query){
+                $query->whereIn('name', ["Admin","Staff member"]);
+            })->where("email",$request->email)->first();
+        $userExists = $user ? $user->exists() : false;
+        if($userExists){
+            $is_pass_correct = $request->password == Crypt::decryptString($user->password) ? true : false;
             if($is_pass_correct){
                 return response()->json([
                     "data" => $user->toJson(),
                     "apiToken" => $user->createToken($request->device)->plainTextToken
                 ], 200);
             }else{
-                $request->json(["message"=>"incorrect credentials"],200); 
+                return response()->json(["message"=>"Identifiants de connexion invalides"],200); 
             }
         }else{
-            $request->json(["message"=>"No user found"],404); 
+            return response()->json(["message"=>"Accès non autorisé"],200); 
         }
     }
     
@@ -93,7 +97,7 @@ class AuthController extends Controller
             $user->tokens()->delete();
             return response()->json(["message" => "Deconencted, Goodbye!"], 200);
         }else{
-            $request->json(["message"=>"No user found"],404); 
+           return response()->json(["message"=>"No user found"],404); 
         }
     }
 }

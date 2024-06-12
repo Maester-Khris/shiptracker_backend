@@ -6,6 +6,21 @@
     <title>Document</title>
 </head>
 <body>
+
+    {{-- <span>{{$mypass}}</span> --}}
+
+    <p>/public{{"/test"}}</p>
+
+    {{-- <img src="{{url('storage/SHIPC1D619F65146/destinataire_card.png')}}" alt="" style="height: 150px;width:140px;"> --}}
+
+    {{-- <script>
+        let span = document.querySelector("span");
+        let plainpass = span.innerText;
+        span.addEventListener("click",function(){
+            span.innerText = '{{Crypt::decryptString($mypass)}}'
+        })
+    </script> --}}
+
     {{-- @php
         dd(Auth::user());
     @endphp --}}
@@ -81,7 +96,7 @@
     </script> --}}
 
 
-    <table>
+    {{-- <table>
         <thead>
             <td>exped</td>
             <td>clients</td>
@@ -89,19 +104,19 @@
             <td>packages</td>
         </thead>
         <tr>
-            {{-- @foreach($details as $line) --}}
-                {{-- @php
+            @foreach($details as $line)
+                @php
                     dd($linee);
-                @endphp --}}
+                @endphp
                 <td>{{$details->ship_details['reference']}}</td>
                 <td>{{$details->client_details['sender_name']}}</td>
                 <td>{{count($details->step_details)}}</td>
                 <td>{{count($details->packages)}}</td>
-            {{-- @endforeach --}}
+            @endforeach
 
            
         </tr>
-    </table>
+    </table> --}}
 </body>
 </html>
 

@@ -5,5 +5,10 @@
 
 # Web forcer la redirection http en https
 
-#update database online
+# Update database online ✅
 - new table message
+
+# Deploy new version of env fome ✅
+- new encryption key
+- regenerate user table with new password: encryption instead of hashing
+- execute php artisan storage:link

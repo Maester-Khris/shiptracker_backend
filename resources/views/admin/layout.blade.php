@@ -14,8 +14,9 @@
     <link href="/assets/admin/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/admin/plugins/nprogress/nprogress.css" rel="stylesheet">
     <link href="/assets/admin/plugins/iCheck/skins/flat/green.css" rel="stylesheet">
-	
-    <link href="/assets/admin/plugins/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+	<link href="/assets/admin/plugins/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+
+    
     <link href="/assets/admin/custom.min.css" rel="stylesheet">
     @stack('styles')
   </head>
@@ -25,32 +26,33 @@
         <div class="main_container">
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><span>Olbizgo Dashboard</span></a>
+                    <div class="navbar nav_title d-flex justify-content-center" style="border: 0;">
+                        <img src="/assets/img/logo_preview.png" alt="Olbizgofont" style="height: 100px;width:180px;">
+                        <a href="index.html" class="site_title"><span><strong>Dashboard</strong></span></a>
                     </div>
                     <div class="clearfix"></div>
                     <br />
         
                     <!-- Side Menu -->
-                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" style="margin-top: 90px;">
                         <div class="menu_section">
-                            <h3 style="margin-bottom: 15px;">Géneral</h3>
+                            <h3 style="margin-bottom: 15px;"><i class="fa fa-suitcase"></i>Géneral</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-home"></i> Expeditions <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-cubes"></i> Expeditions <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                       <li><a href="/dashboard/expeditions">Liste expedition</a></li>
                                       <li><a href="/dashboard/expeditions/detail">Details expedition</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="/dashboard/stats"><i class="fa fa-home"></i> Statistiques </a>
+                                    <a href="/dashboard/stats"><i class="fa fa-bar-chart"></i> Statistiques </a>
                                 </li>
                                 <li>
-                                    <a href="/dashboard/accounts"><i class="fa fa-home"></i> Compte utilisateurs </a>
+                                    <a href="/dashboard/accounts"><i class="fa fa-users"></i> Compte utilisateurs </a>
                                 </li>
                                 <li>
-                                    <a href="/dashboard/messages"><i class="fa fa-home"></i> Messages </a>
+                                    <a href="/dashboard/messages"><i class="fa fa-envelope"></i> Messages </a>
                                 </li>
                             </ul>
                         </div>
@@ -70,10 +72,10 @@
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                                     <img src="/assets/img/admin.png" alt="">
-                                    Administrateur Olbizgo
+                                    Admin Olbizgo
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/" target="_blank">Ouvir le site</a>
+                                    <a class="dropdown-item" href="/" target="_blank"><i class="fa fa-external-link pull-right" style="font-size: 13px;"></i>  Ouvir le site</a>
                                     <a class="dropdown-item" ><i class="fa fa-sign-out pull-right"></i>Deconnexion</a>
                                 </div>
                             </li>

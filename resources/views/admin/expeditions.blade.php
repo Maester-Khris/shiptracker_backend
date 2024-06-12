@@ -1,5 +1,38 @@
 @extends('admin/layout')
 
+@php
+    function statusPlain($status){
+        switch($status){
+            case "ORDERED":
+                return App\Enums\ShippingStatus::ORDERED->value;
+            case "DEPOSITED":
+                return App\Enums\ShippingStatus::DEPOSITED->value;
+            case "ONWAY":
+                return App\Enums\ShippingStatus::ONWAY->value;
+            case "ARRIVED":
+                return App\Enums\ShippingStatus::ARRIVED->value;
+            case "DELIVERED":
+                return App\Enums\ShippingStatus::DELIVERED->value;
+        }
+    }
+@endphp
+
+@push('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded",function(){
+        console.log('ye');
+        var copy_buttons = document.querySelectorAll(".copy_button");
+        copy_buttons.forEach(btn =>{
+            btn.addEventListener("click",function(){
+                let span_text = btn.previousElementSibling;
+                console.log(span_text);
+                navigator.clipboard.writeText(span_text.innerText);
+            })
+        });
+    });
+</script>
+@endpush
+
 @section('content')
 <div class="row">
     <div class="col-md-12 col-sm-12 ">
@@ -28,14 +61,17 @@
                                 <tbody>
                                     @foreach ($shippings as $item)
                                         <tr>
-                                            <td>{{$item->reference_exp}}</td>
+                                            <td class="position-relative">
+                                                <span>{{$item->reference_exp}}</span>
+                                                <i class="copy_button icon-clickable fa fa-copy position-absolute" style="font-size:12px;top:5px;right:5px;cursor:pointer;color:#2A3F54;"></i>
+                                            </td>
                                             <td>{{$item->sender}}</td>
                                             <td>{{$item->sender_telephone}}</td>
                                             <td>{{$item->receiver}}</td>
                                             <td>{{$item->receiver_telephone}}</td>
                                             <td>{{count($item->packages)}}</td>
                                             <td>{{$item->created_at}}</td>
-                                            <td>{{$item->status_exp}}</td>
+                                            <td>{{statusPlain($item->status_exp)}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

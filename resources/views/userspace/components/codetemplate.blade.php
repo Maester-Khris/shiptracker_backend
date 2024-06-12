@@ -1,6 +1,6 @@
 <template id="package-slide">
     <div class="swiper-slide" style="border-radius: 10px!important;">
-        <div class="card" style="border-radius: 10px!important;">
+        <div class="card" style="border-radius: 0px!important;background:transparent!important;box-shadow:none;">
             <div class="card-body">
                 <i class="ph-bold ph-package ms-3" style="font-size: 30px;"></i>
                 <h4>Colis N°1</h4>

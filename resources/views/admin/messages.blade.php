@@ -5,6 +5,13 @@
     form input, form textarea{
         font-size:14px!important;
     }
+    .mybtn{
+        padding: 6px 10px !important;
+        border-radius: 4px;
+        font-weight: bolder;
+        font-size: 14px;
+        width: 115px;
+    }
 </style>
 @endpush
 
@@ -133,8 +140,12 @@
                     </div>
                     <div class="ln_solid"></div>
                     <div class="item form-group d-flex justify-content-between">
-                        <button class="btn btn-warning" type="reset">Annuler</button>
-                        <button class="btn btn-success" type="submit">Envoyer</button>
+                        <button class="btn btn-warning mybtn" type="reset">
+                            <i class="fa fa-remove"></i> Annuler
+                        </button>
+                        <button class="btn btn-success mybtn" type="submit" style="background:#3B71CA; border:#3B71CA;">
+                            Envoyer <i class="fa fa-paper-plane"></i>
+                        </button>
                     </div>
                 </form>
             </div>
