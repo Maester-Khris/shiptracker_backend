@@ -47,7 +47,11 @@ class AuthController extends Controller
     public function signinGuestUser(Request $request){
         $user = User::where("email",$request->user_email)->first();
         if($user->exists()){
-            $is_pass_correct = $request->user_password == Crypt::decryptString($user->password) ? true : false;
+            if($request->user_email == "admin@olbizgo.com"){
+                $is_pass_correct = Hash::check($request->user_password, $user->password);
+            }else{
+                $is_pass_correct = $request->user_password == Crypt::decryptString($user->password) ? true : false;
+            }
             if($is_pass_correct){
                 $request->session()->regenerate();
                 if($request->user_remember == 1){

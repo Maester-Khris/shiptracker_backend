@@ -1,7 +1,7 @@
-@extends('userspace/layout',['title'=>'Mes Expeditions', 'menu_item_title'=>'Expeditions'])
+@extends('userspace/layout',['title'=>'Mes Expeditions', 'menu_item_title'=>'expeditions'])
 
     @push('styles')
-        <link rel="stylesheet" href="assets/css/loader.css">
+        <link rel="stylesheet" href="/assets/css/loader.css">
         <style>
             .icon-clickable{
                 cursor: pointer;

@@ -1,4 +1,4 @@
-# Sync test users updated password hash in remote and local db ✅
+ # Sync test users updated password hash in remote and local db ✅
 - test users password hash: $2y$10$sccQ66V4hg8MvRyxve11WeDJgG76vPSn6F2PGyviOtiEmbXnZUK26
 - SQL Command: 
     * update users set password = '$2y$10$sccQ66V4hg8MvRyxve11WeDJgG76vPSn6F2PGyviOtiEmbXnZUK26' where id in (1,2);
@@ -12,3 +12,8 @@
 - new encryption key
 - regenerate user table with new password: encryption instead of hashing
 - execute php artisan storage:link
+
+# Notes
+-   New color: 
+    * main blue: #5B99C2 herosection bg-color, 
+    * second blue: header, footer #0F67B1

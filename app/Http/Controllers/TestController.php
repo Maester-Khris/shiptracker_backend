@@ -29,80 +29,152 @@ class TestController extends Controller
         $this->shipService = $shipService;
     }
 
-    public function welcome(){
-       
-        // $folder = "mytest2";
-        // $foldername = "/uploads/".$folder;
-
-        // $filename = public_path($foldername .'/codebar.jpg');
-
-        // $test = file_exists(public_path($foldername));
-        // dd($filename); 
-
-        // $filesystem = new Filesystem();
-        // if(!$filesystem->exists(public_path($foldername))){
-        //     $filesystem->makeDirectory(public_path($foldername), 0755, true, true);
-        // }
-        
-
-
-        // mkdir(public_path($foldername));
-
-        // as path use $foldername. '/file.jpg'; and access using public path
-        // dd(public_path($foldername.'/codebar.jpg'));
-
-        // $today = Carbon::now();
-        // $myreference = "SHIP19655767";
-        // $foldername = $myreference;
-        // $barcodedigit = $this->shipService::generate12DigitCode($today, $myreference);
-        // $path = $this->barcodeService::generateBarcode($barcodedigit, $barcodedigit, $foldername);
-        // dd($path);
-
-        // return view('welcome');
+    public function index(){
+        return view('welcome');
     }
 
-    public function index(){
-        
+    public function welcome(){
+        // $nbmonths=2;
+        /* =========== 0 - Stats on Shippings ==============
+        * 1- count all
+        * 2- count new one per last month
+        */
+        // $shippnb = Shipping::all()->count();
+        // $shipsperMonth = $this->shipCountPerLastNMonth($nbmonths);
+
+        /* =========== 2- Stats on Shippings Client (sender) ==============
+        * 1- count all client
+        * 2- count new one per last month
+        */
+        // $clientsnb = $this->totalDistinctElts();
+        // $clientsnb->count();
+        // $clientsperMonth = $this->clientPerLastMonth($nbmonths);
+
+        /* =========== 3- Stats on Shippings effectiveness ==============
+        * 1- count shipping by group of status: ORDERED - | ONWAY | - DELIVERED
+        */
+        // $effective_ship = $this->countEltperGroupingStatus();
+
+        /* =========== 4- Stats on Shippings performance ==============
+        * 1- average transit duratin per mont
+        */
+        // $transitstats = $this->avgTransitDuration($nbmonths);
+
+        // $today = Carbon::today()->endOfDay();
+        // $startoflastmonths = $today->copy()->subMonths(($nbmonths-1))->startOfMonth()->startOfDay();
+        // $data = DB::table("shippings")
+        //     ->whereBetween('created_at', [$startoflastmonths, $today])
+        //     ->select(DB::raw('MONTH(created_at) as month'), 'sender', 'created_at')
+        //     ->distinct()
+        //     ->get();
+
+        // $groupeddata = $data->groupBy('month');
+
+        // dd($this->eltsBetweenNowAndLastNMonth($nbmonths));
+        // dd($transitstats);
+    }
+
+
+
+
+
+    // Stats on Shippings
+
+    // Nomber of create ship for last n month
+    public function shipCountPerLastNMonth($nbmonths){
+        $today = Carbon::today()->endOfDay();
+        $startoflastmonths = $today->copy()->subMonths(($nbmonths-1))->startOfMonth()->startOfDay();
+        $data = DB::table("shippings")
+            ->whereBetween('created_at', [$startoflastmonths, $today])
+            ->select(DB::raw('MONTH(created_at) as month'),  'reference_exp')
+            ->distinct()
+            ->get();
+
+        return $data->groupBy('month')->map(function($item){
+            return $item->count();
+        });;
+    }
+
+
+
+    public function totalDistinctElts(){
+        $data = DB::table("shippings")
+            ->select('sender')
+            ->distinct()
+            ->get();
+
+        return $data;
+    }
+    public function clientPerLastMonth($nbmonths){
+        $today = Carbon::today()->endOfDay();
+        $startoflastmonths = $today->copy()->subMonths(($nbmonths-1))->startOfMonth()->startOfDay();
+        $data = DB::table("shippings")
+            ->whereBetween('created_at', [$startoflastmonths, $today])
+            ->select(DB::raw('MONTH(created_at) as month,  COUNT(DISTINCT sender) as senders'))
+            ->groupby('month')
+            ->get();
+
+        return $data->groupby('month')->map(function($item){
+            return $item[0];
+        });;
+    }
+
+
+
+    public function groupEltsByLastNMonth($nbmonths){
+        $today = Carbon::today()->endOfDay();
+        $startoflastmonths = $today->copy()->subMonths(($nbmonths-1))->startOfMonth()->startOfDay();
+        $data = DB::table("shippings")
+            ->whereBetween('created_at', [$startoflastmonths, $today])
+            ->select(DB::raw('MONTH(created_at) as month'), 'sender', 'created_at', 'departure_date','arrival_date')
+            ->distinct()
+            ->get();
+
+            // return $data->groupBy('month');
+
+        return $data->groupBy('month')->map(function($item){
+            return $item[0];
+        });
+    }
+
+    
+    public function countEltperGroupingStatus(){
+        $data = DB::table('shippings')
+            ->select(DB::raw('COUNT(id) as totalids'), 'status_exp')
+            ->groupBy("status_exp")->get();
+
+        $res = $data->groupBy("status_exp")->map(function($item){
+            return $item[0]->totalids;
+        });
+        return $res;
+    }
+
+    public function avgTransitDuration($nbmonths){
+        $today = Carbon::today()->endOfDay();
+        $startoflastmonths = $today->copy()->subMonths(($nbmonths-1))->startOfMonth()->startOfDay();
+        $data = DB::table("shippings")
+            ->whereBetween('created_at', [$startoflastmonths, $today])
+            ->select(DB::raw('MONTH(created_at) as month'), 'sender', 'created_at', 'departure_date','arrival_date')
+            ->distinct()
+            ->get();
+
+
+        $groupeddata = $data->groupBy('month');
+        $final = [];
+        $groupeddata->each(function($monthgroup){
+            $temp = [];
+            foreach($monthgroup as $item){
+                $avgtransit = Carbon::createFromFormat('Y-m-d H:i:s',$item->arrival_date)
+                ->diffInDays(Carbon::createFromFormat('Y-m-d H:i:s',$item->departure_date));
+                $temp[]=$avgtransit;
+                $item->transitduration=$avgtransit;
+            }
+            $monthgroup->avgtransit = collect($temp)->avg();
+            return $monthgroup;
+        });
+    
+        return $groupeddata->map(function($item){
+            return $item->avgtransit;
+        });
     }
 }
-
-// $user = User::find(3);
-// $is_pass_correct = "test staff" == Crypt::decryptString($user->password) ? true : false;
-// dd($is_pass_correct);
-
-// return view("welcome");
-// Storage::makeDirectory('public/les enfoires2');
-// if(Storage::disk('public')->exists('les enfoires')){
-//     dd("yes");
-// }else{
-//     dd('dont exist');
-// }
-
-// $user = User::whereHas("roles", function ($query){
-//     $query->whereIn('name', ["Admin","Staff member"]);
-// })->where("email","olbizgo@admin.com")->first();
-// dd(isset($user));
-
-// $steps = Step::all();
-// $linkedsteps = DB::table('shipping_step')
-//    ->where('shipping_id', 2)
-//    ->get();
-
-// $data = $steps->map(function($step) use ($linkedsteps){
-//     $temp = $linkedsteps->where("step_id",$step->id)->first();
-//     return [
-//         "step_name" => $step->name,
-//         "step_running_flag" =>  $temp != null ?  $temp->step_running : null,
-//         "step_launched_date" => $temp != null ?  $temp->step_launched : null
-//     ];
-// });
-// dd( $data);
-// $temp = $linkedsteps->where("step_id",2)->first();
-// dd( $temp->step_running);
-
-// $ship_running_step = DB::table('shipping_step')
-//     ->where('shipping_id', 1)
-//     ->where('step_running', true)
-//     ->select('step_id')
-//     ->get();
-        

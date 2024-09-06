@@ -16,6 +16,9 @@ class GuestController extends Controller
         return view('auth.login');
     }
 
+    public function searchEngine(){
+        return view('resultsearch');
+    }
 
     public function registerMessage(Request $request){
         // validate input, if bad return with inputs

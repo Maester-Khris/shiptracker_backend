@@ -129,7 +129,8 @@
     
 
     <script src="/assets/admin/plugins/moment/min/moment.min.js"></script>
-    <script src="/assets/admin/custom.min.js"></script>
+    <script src="/assets/admin/custom.js"></script>
+    {{-- <script src="/assets/admin/custom.min.js"></script> --}}
     @stack('scripts')
   </body>
 </html>

@@ -1,3 +1,10 @@
+@php
+    $allpackagesweight = 0;
+    foreach($ship->packages as $pack){
+        $allpackagesweight += $pack->weight;
+    }
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    
-    <title>Recu imprimable</title>
+    <title></title>
     <style>
         body *{
             font-family: "Quicksand", sans-serif;
@@ -15,7 +21,6 @@
             font-weight: 300;
             font-style: normal;
         }
-        
         .pad-10{
             padding: 4px 10px;
         }
@@ -65,7 +70,7 @@
     <div class="content-section" style="padding-top:10px;margin-bottom:20px">
         <div style="width:100%; margin-bottom:10px;">
             <strong style="font-weight: 700;">OLBIZGO EXPRESS</strong>
-            <span style="float:right">Total Colis: 4</span>
+            <span style="float:right">Total Colis: {{$ship->packagesCount}}</span>
         </div>
         <div style="margin-bottom: 10px;">
             <div class="info-place" style="float:left;width:40%;text-align:left;">
@@ -74,22 +79,35 @@
                 France
             </div>
             <div  style="float:right;width:40%;text-align:right;">
-                Total poids: 2,4 Kg <br>
-                DATE DEP: 12-01-2024 <br>
-                DATE EXP: 19-04-2024 <br>
-                DATE ARR: 20-05-2024
+                Total poids: {{$allpackagesweight}} Kg <br>
+                DATE CRE: {{\Carbon\Carbon::createFromFormat('Y-m-d h:m:s',$ship->created_at)->format('Y/m/d')}} <br> 
+                @if($ship->departure_date)
+                    DATE EXP: {{\Carbon\Carbon::createFromFormat('Y-m-d h:m:s',$ship->departure_date)->format('Y/m/d')}} <br> 
+                @else
+                    DATE EXP: / <br> 
+                @endif
+                @if($ship->arrival_date)
+                    DATE EXP: {{\Carbon\Carbon::createFromFormat('Y-m-d h:m:s',$ship->arrival_date)->format('Y/m/d')}} <br> 
+                @else
+                    DATE ARR: / <br> 
+                @endif
+
             </div>
             <div style="clear: both"> </div>
         </div>
         <div style="text-align: left">
             <strong style="font-weight:700;margin-bottom:5px;">ENVOYÉ À:</strong> <br>
-            MBEZELE TORALI CLAUDINE  <br>
-            +237789034332323
+            {{$ship->receiver}}  <br>
+            {{$ship->receiver_telephone}}
         </div>
     </div>
     <hr>
     <div class="code-section" style="width: 100%;text-align:center;padding-top:10px;">
-        <img src="/assets/img/code_6.jpg" alt="ship code" style="widows:80px;height:80px;">
+        @if($ship->codebar_url)
+            <img src="{{$ship->codebar_url}}" alt="ship code" style="widows:80px;height:80px;">
+        @else
+            <span>AUCUN CODE TROUVÉ</span>
+        @endif
     </div>  
   </div>
 
@@ -100,12 +118,3 @@
   </script>
 </body>
 </html>
-
-{{-- <span>to the WA</span> --}}
-{{-- <div style="height: 400px; width:400px; border:1px solid grey; border-radius:5px;margin:40px auto;display:flex;justify-content:center;align-items:center;">
-<form action="" method="get" data-monetbil="form"><button class="" type="submit">Pay by Mobile Money</button></form>
-</div> --}}
-{{-- Integration menetbill --}}
-{{-- <script type="text/javascript" src="https://fr.monetbil.com/widget/v2/monetbil.min.js"></script> --}}
-
-    

@@ -1,0 +1,86 @@
+#form-buscar >.form-group >.input-group > .form-control {
+    height: 40px;
+}
+#form-buscar >.form-group >.input-group > .input-group-btn > .btn{
+    height: 40px; 
+    font-size: 16px;
+    font-weight: 300; 
+}
+#form-buscar >.form-group >.input-group > .input-group-btn > .btn .glyphicon{
+ margin-right:12px;   
+}    
+#form-buscar >.form-group >.input-group > .form-control {
+    font-size: 16px;
+    font-weight: 300;
+}
+#form-buscar >.form-group >.input-group > .form-control:focus {
+  border-color: #33A444;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 1px rgba(0, 109, 0, 0.8);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 1px rgba(0, 109, 0, 0.8);
+}
+section#hero{
+    height: 100vh!important;
+}
+.hero{
+    background-color: #5B99C2!important;
+}
+.service-item{
+    max-height:150px;
+    padding-left:0px!important;
+    background:#eee;
+    border-radius:5px;
+    width: 23%;
+}
+.service-item .icon{
+    width:18%;
+    background-color:#F98894!important;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px; 
+    padding:0px 5px;
+}
+.service-item div:last-child{
+    padding: 20px 0px;
+}
+.service-item .icon img{
+    width: 60px!important;
+    height: 60px!important;
+}
+.service-item .icon i{
+    font-size: 30px!important;
+    border-radius: 15px;
+}
+.service-item:hover {
+    box-shadow: 10px 7px 17px 5px rgba(90,152,192,0.73);
+    -webkit-box-shadow: 10px 7px 17px 5px rgba(90,152,192,0.73);
+    -moz-box-shadow: 10px 7px 17px 5px rgba(90,152,192,0.73);
+}
+.service-item:hover .icon{
+    width: 20%!important;
+    transition-duration: 0.5s;
+}
+.service-img{
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+}
+.search-slt{
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    height: calc(3rem + 2px) !important;
+    border-radius:0;
+}
+.wrn-btn{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+    height: calc(3rem + 2px) !important;
+    border-radius:0;
+}

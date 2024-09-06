@@ -129,8 +129,8 @@
                 <div class="row gy-4">
                     <div class="col-lg-3">
                         <div class="services-list" style="border: 0;margin-bottom:0px;padding-left:0px;">
-                            <a href="/userspace/expeditions" class="active" style="margin: 5px 0px;">Suivre mon expedition</a>
-                            {{-- <a href="/userspace/estimator" class="{{ $menu_item_title == "Estimateur" ? 'active' : '' }}">Estimateur de cout</a> --}}
+                            <a href="/userspace/expeditions" class="{{ $menu_item_title == "expeditions" ? 'active' : '' }}" style="margin: 5px 0px;">Suivre mon expedition</a>
+                            <a href="/userspace/paiements" class="{{ $menu_item_title == "payments" ? 'active' : '' }}">Mes Paiements</a>
                             {{-- <a href="/userspace/account" class="{{ $menu_item_title == "Parametre" ? 'active' : '' }}">Parametres du compte</a> --}}
                         </div>
                     </div>

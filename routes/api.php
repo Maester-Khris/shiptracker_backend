@@ -31,9 +31,15 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post("/shipping/update-step", 'App\Http\Controllers\RestController@ShippingNewStep');
     Route::post("/shipping/update-status", 'App\Http\Controllers\RestController@ShippingNewStatus');
 
-    
+    Route::get("/statistics", 'App\Http\Controllers\RestController@getStats');
     Route::post("/shipfolder/saveImage", 'App\Http\Controllers\RestController@uploadImage');
     Route::get("/logout", 'App\Http\Controllers\AuthController@signoutRemoteUser');
+
+    // payment method
+    Route::get("/user/launch-payment",'App\Http\Controllers\RestController@initiatePayment');
+    Route::get("/notify-payment",'App\Http\Controllers\RestController@notifyPaymentStatus');
+    Route::get("/notify-payment/success",'App\Http\Controllers\RestController@notifyPaymentSuccess');
+    Route::get("/notify-payment/faled",'App\Http\Controllers\RestController@notifyPaymentFailed');
 });
 
 Route::get("/test", 'App\Http\Controllers\RestController@getSomeInfo');

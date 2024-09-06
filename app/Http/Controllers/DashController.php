@@ -9,6 +9,7 @@ use App\Models\Message;
 use App\Models\Shipping;
 use App\Mail\ShiptrackerMail;
 use App\Traits\ShippingOperation;
+use App\Traits\ShippingStatistics;
 use Spatie\Permission\Models\Role;
 
 use Hash;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Storage;
 class DashController extends Controller
 {
     use ShippingOperation;
+    use ShippingStatistics;
 
     public function home(){
         return redirect('/dashboard/expeditions');
@@ -31,6 +33,7 @@ class DashController extends Controller
 
     public function listExpeditions(){
         $shippings = Shipping::all();
+
         return view("admin.expeditions")->with(compact('shippings'));
     }
     public function getExpeditionDetail(Request $request){
@@ -63,6 +66,28 @@ class DashController extends Controller
         return back();
     }
 
+    /**
+     * stats indicator
+     * 0- detail expedition: total expeditions(title), new expedition for each of last 06 month (line chart)
+     * 1- details clients: total client(title, distinct sender_name), new client for last 03 months (horizontal bargraph)
+     * 2- details about expeditions : donught graph - still running expedition, create but not yet started, started and finished
+     * 3- performance details: horizontal bar graph average transit duration (in days for last 03 months)
+     * durre moyen transite prendre uniquement les expedition deja terminée
+    */
+    public function statistics(){
+        $nbmonthFull = 6;
+        $nbmonth = 4; 
+        $stats = [
+            "shipcount" => Shipping::all()->count(),
+            "clientcount" => count($this->totalDistinctClients()),
+            "newshippermonth" => $this->shipCountPerLastNMonth($nbmonthFull),
+            "newcltpermonth" => $this->clientPerLastMonth($nbmonth),
+            "shipCountPerStatus" => $this->groupShippingperStatus(),
+            "lastTransitAvg" => $this->avgTransitDuration($nbmonth)
+        ];
+        return view("admin.statistique")->with(compact('stats'));
+    }
+
 
     public function listStaff(){
         $staffs = User::role('Staff member')->get();
@@ -89,6 +114,13 @@ class DashController extends Controller
         $user->save();
         session()->flash('pass_status', 'Le Mot de passe de $user->name a bien été mis à jour !');
         return back();
+    }
+
+
+    public function printDetails($shipcode){
+        $ship = Shipping::with('packages')->where('reference_exp',$shipcode)->first();
+        // dd($ship);
+        return view("printable.ticket")->with(compact('ship'));
     }
 
 

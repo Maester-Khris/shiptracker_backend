@@ -13,14 +13,14 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded',function(){
-        let print_btn = document.querySelector("#print-barcode");
-        let imgtemplate = document.querySelector('template#img-source');
-        let imgcontainer = document.importNode(imgtemplate.content, true);
-        let imgtoPrint = imgcontainer.querySelector('img');
-        print_btn.addEventListener('click',function(){
-            win = window.open(imgtoPrint.src,"_blank");
-            win.onload = function() { win.print(); }
-        });
+        // let print_btn = document.querySelector("#print-barcode");
+        // let imgtemplate = document.querySelector('template#img-source');
+        // let imgcontainer = document.importNode(imgtemplate.content, true);
+        // let imgtoPrint = imgcontainer.querySelector('img');
+        // print_btn.addEventListener('click',function(){
+        //     win = window.open(imgtoPrint.src,"_blank");
+        //     win.onload = function() { win.print(); }
+        // });
     });
 </script>
 @endpush
@@ -151,7 +151,8 @@
                           <p class="title">Code digital à 12 chiffre</p>
                           <p style="margin-bottom: 0px;">{{$details->ship_details["codebardigit"]}}</p>
                           <p>Imprimer le code barre 
-                            @isset($details->ship_details["codebarurl"]) <a id="print-barcode" style="cursor: pointer;"><i class="fa fa-print" style="float: right; font-size:17px;"></i></a> @endisset
+                            {{-- updated to print ticket --}}
+                            @isset($details->ship_details["codebarurl"]) <a id="print-barcode" href="{{route('print_ticket',['shipcode' => $shipcode])}}" target="_blank" style="cursor: pointer;"><i class="fa fa-print" style="float: right; font-size:17px;"></i></a> @endisset
                             @empty($details->ship_details["codebarurl"]) <i class="fa fa-minus-circle" style="float: right; font-size:17px;"></i> @endempty
                           </p>
                           <div style="margin-top: 20px;">

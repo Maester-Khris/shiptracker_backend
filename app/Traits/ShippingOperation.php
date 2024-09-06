@@ -39,11 +39,8 @@ trait ShippingOperation{
     }
 
     public function launchShipping($route, $shipcode){
-        $today = Carbon::now();
         $route_first_step = $route->steps()->orderBy('created_at', 'asc')->first();
         $shipping = Shipping::where("reference_exp",$shipcode)->first();
-        $shipping->departure_date = $today;
-        $shipping->save();
         DB::table('shipping_step')
             ->insert([
                 'shipping_id' => $shipping->id, 
@@ -76,6 +73,9 @@ trait ShippingOperation{
         $shipping->status_exp = $status;
         if($status == "ARRIVED" || $status == "DELIVERED"){
             $shipping->arrival_date = Carbon::now();
+        }
+        if($status == "ONWAY"){
+            $shipping->departure_date = Carbon::now();;
         }
         $shipping->save();
         return 1;
@@ -146,8 +146,7 @@ trait ShippingOperation{
         }
     }
 }
-// $ship_steps = DB::table('shipping_step')
-//     ->where('shipping_id',$ship->id)
-//     ->join('steps','shipping_step.step_id','=','steps.id')
-//     ->select('shipping_step.step_running','shipping_step.step_launched','steps.name as step_name')
-//     ->get();
+
+// $today = Carbon::now();
+// $shipping->departure_date = $today;
+// $shipping->save();
